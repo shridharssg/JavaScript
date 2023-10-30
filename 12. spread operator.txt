@@ -1,0 +1,181 @@
+Spread Operator is introduced in ES6 
+syntax 	
+	3 dots(...) followed by the arrayname (or iterable*)
+
+	
+its expand the array into individual elements.
+So it can be used to expand the array in a places where zero or more elements are expected.
+
+Spread operator used in 3 categories
+with Array 
+with objects
+with functions
+
+
+[one, two, three] array expand into:  one two three
+----
+
+//what is spread operator
+	
+	const users = ["user1","user2"];
+	console.log(users);
+
+	o/p : ["user1","user2"]
+		so here it output it will show elements in array.
+
+	if we want to get elements individully rather than in array, then used spread operator.
+
+	const users = ["user1","user2"];
+	console.log(...users)
+	
+	o/p : user1 user2
+	
+its same like printing 
+	console.log('team1', 'team2')
+	o/p : team1 team2
+
+--------
+	
+//spread operator with arrays : used [...] 
+
+	const team1 = ["user1","user2"];
+	const team2 = ["user3"];
+
+	option: 1
+	to concate this two array in single array, we can used concate() metthod
+	
+	const newTeam = team1.concat(team2);
+
+	console.log(newTeam)
+	o/p : ["user1","user2","user3"]  -> its combination of team1 and team2 array
+
+	---
+	option: 2
+
+	const myTeam = [...team1, ...team2]
+	console.log(myTeam)
+
+	o/p : 	["user1","user2","user3"]	
+
+	note : 
+	
+	1.	console.log(myTeam) : ["user1","user2","user3"]  // showing in array
+	
+	2. 
+	const users = ["user1","user2"];
+	console.log(...users)
+	
+	o/p : user1 user2	
+	
+where to used
+	so here we have 2 options like spread and concate() to combine multiple arrays in single array. 
+	so if we have simply combile 2 arrays in single then we can used concate().
+	but if we want to combine more number arrays in single array then go with spread operator which is easy to use,smaller to write.
+
+		const myTeam = [...team1, ...team2, ...team3, ...team4]
+	
+where to not used
+	const newteamMember = "user4"
+	const latestTeam = team1.concate(newteamMember)
+
+	console.log(latestTeam) // ["user1","user2","user4"]
+
+if we go with spread operator
+	const latestTeam = [...team1, ...newteamMember]
+
+	console.log(latestTeam) //  ['user1', 'user2', 'u', 's', 'e', 'r', '4']
+	
+
+**imp**
+copy one array into another
+
+	const productList1 = ["phone", "charger"];
+	const newProduct = productList1			// clone array
+
+here, both array have same list of product.
+
+problem : add new product in clone array (newProduct).
+
+	newProduct.push("camera")
+
+
+	console.log(productList1) // o/p : ["phone", "charger", "camera"]
+	console.log(newProduct) // o/p : ["phone", "charger", "camera"]
+
+So when we add new product in 2nd array, it also modify the 1st array (productList1). bcz array is referenct type which is immutable.
+
+	to overcome this issue, use the spread operator
+
+	const productList1 = ["phone", "charger"];
+	const newProduct = [...productList1]      // here we are spreading individully and then giving to newProduct. so it doesnt hold reference of productList1 , rather than it create new reference
+
+	
+	newProduct.push("camera")
+
+
+	console.log(productList1) // o/p : ["phone", "charger"]
+	console.log(newProduct) // o/p : ["phone", "charger", "camera"]
+
+	
+-------------------------------------------------------------
+	
+
+ 
+//spread operator with objects : { ... }
+
+	const emp = {
+		'name': 'srinath',
+		'job':'developer'
+	}
+
+	//copy or cloned one obj to another
+	
+	const clonedObj = {...emp}
+
+
+	//merge to object in single object
+
+	const details = {
+		'salary' : 3000	
+	} 
+
+	
+	const allDetails = {...emp, ...details}
+
+
+-------------------------------------------------------------
+
+//spread operator in function calls
+
+suppose we want to find out min and max number from list.
+
+	console.log(Math.min(10,5,4,3,15))
+	o/p : 3
+
+find out min number from array list
+
+	const scoreList = [10,5,4,3,15];
+	
+	console.log(Math.min(scoreList))
+	o/p : NaN 
+		bcz here we are passing a array to math.min function. so its not working.
+
+To overcome this, use spread operator
+
+	console.log(Math.min(...scoreList))
+	o/p : 3  // bcz spread operator, spread the elements individually first and then it passed to min function.
+
+
+apply()
+	same thing, we can also achieve from apply()
+
+	console.log(Math.min.apply(null,scoreList))       // need to pass first parameter is this. but here this is not exist so passed null
+			 	
+
+-------------------------------------------------------------
+
+// immutability with spread operator
+	already explaind above 
+	spread operator used to make object , array mutable
+
+	

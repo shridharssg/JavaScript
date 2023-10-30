@@ -1,0 +1,82 @@
+Diff between promise and Async-Await
+
+
+In the async function, javascript will post the execution of function until promise is settle
+
+await :
+The keyword await, as the name describes it makes JavaScript wait until that promise settles and returns its result. 
+It can be used within the async block only. It only makes the async block wait.
+
+We can catch the error by using the try…catch statement, the same way as a regular throw statement:
+
+
+In promise, 
+With the help of .then, rest of function execution continue, but javascript wont execute the then callback untill the promise settle.
+
+
+================================example
+
+
+function delay(i){
+	return new Promise(resolve =>{
+		setTimeout(function(){
+			resolve(i)
+		}, i*1000)		//delay of i like if i = 5 then delay 5 second
+	})
+}
+
+async function test(){
+	console.log("started")
+
+	for(let i=0; i<5; i++){
+		const res = await delay(i)
+		console.log(res)
+	}
+
+	console.log("ended")
+}
+
+
+test();
+
+====================
+
+o/p if used async await: 
+
+started
+1
+2
+3
+4
+5
+ended
+
+====================================================================================================
+
+
+function test(){
+	console.log("started")
+
+	for(let i=0; i<5; i++){
+		const res = delay(i)
+		res.then(res=>console.log(res));
+	}
+
+	console.log("ended")
+}
+
+
+test();
+
+
+
+o/p if used promise: 
+
+started
+ended
+1
+2
+3
+4
+5
+

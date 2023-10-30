@@ -1,0 +1,88 @@
+https://www.freecodecamp.org/news/prototypes-and-inheritance-in-javascript/
+
+
+What is Prototype?
+	In JavaScript, objects have a special hidden property [[Prototype]], that is either null or references another object. That object is called "Prototype".
+	In JavaScript, an object can inherit properties of another object. The object from where the properties are inherited is called the prototype.
+
+What is Prototypal Inheritance?
+	When we want to read a property from object, and it’s missing, JavaScript automatically takes it from the prototype. 
+	In programming, such thing is called "prototypal inheritance"
+	The property [[Prototype]] is internal and hidden, but there are many ways to set it via __proto__or Object.getPrototypeOf 
+
+What is prototype chain?
+	When we try to access a property of an object, the property is not only searched in the object itself. It's also searched in the prototype of the object, in the prototype of the prototype, and so on – until a property is found that matches the name or the end of the prototype chain is reached
+	If the property or method isn’t found anywhere in the prototype chain, only then will JavaScript return undefined.
+
+
+// old-way
+obj.__proto__
+
+// new-way
+Object.getPrototypeOf(obj)
+
+
+Q. All object have prototypes. ?
+	false (in prototype chain, If the property or method isn’t found anywhere in the prototype chain, only then will JavaScript return undefined. me)
+=========================	
+
+Intro
+Have you ever wondered how strings, arrays or objects “know” the methods each of them have? How does a string know it can .toUpperCase() or an array know that it can .sort()? We never defined these methods manually, right?
+
+The answer is that these methods come built-in within each type of data structure thanks to something called prototype inheritance.
+
+-------
+
+Why the need for inheritance
+	inheritance solves the problem of data and logic duplication. By inheriting, objects can share properties and methods without the need of manually setting 	those properties and methods on each object.
+
+------
+
+How to Access a Prototype’s Properties and Methods in JavaScript
+
+When we try to access a property of an object, the property is not only searched in the object itself. It's also searched in the prototype of the object, in the prototype of the prototype, and so on – until a property is found that matches the name or the end of the prototype chain is reached.
+
+If the property or method isn’t found anywhere in the prototype chain, only then will JavaScript return undefined.
+
+Every object in JavaScript has an internal property called [[Prototype]].
+
+If we create an array and log it to the console like this:
+
+const arr = [1,2,3]
+console.log(arr)
+
+o/p : check in inspect - console
+
+(3) [1, 2, 3]
+0: 1
+1: 2
+2: 3
+length: 3
+[[Prototype]]: Array(0)
+
+
+The double square brackets that enclose [[Prototype]] signify that it is an internal property, and cannot be accessed directly in code.
+
+To find the [[Prototype]] of an object, we will use the Object.getPrototypeOf() method.
+
+const arr = [1,2,3]
+console.log(Object.getPrototypeOf(arr)
+
+
+o/p : 
+[constructor: ƒ, at: ƒ, concat: ƒ, copyWithin: ƒ, fill: ƒ, …]
+at:ƒ at()
+concat: ƒ concat()
+constructor: ƒ Array()
+copyWithin: ƒ copyWithin()
+entries:ƒ entries()
+every: ƒ every()
+fill: ƒ fill()
+filter: ƒ filter()
+find: ƒ find()
+findIndex : ƒ findIndex()
+map : ƒ map()
+
+etc ..... it will print all methods name which we are used on array
+
+

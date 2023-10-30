@@ -1,0 +1,123 @@
+
+new Keyword : https://codeburst.io/javascripts-new-keyword-explained-as-simply-as-possible-fec0d87b2741
+
+A new keyword is used to create an object from the constructor function.
+
+1. Normal Function Call
+To explain what new does, let’s start with just a normal function, called without new. We want to write a function that will create “person” objects. It’ll give these objects name and age properties based on parameters that it takes in.
+
+function personFn(name, age) {
+    var personObj = {};
+    personObj.name = name;
+    personObj.age = age;
+    
+    return personObj;
+}
+var alex = personFn('Alex', 30);
+o/p :  -> { name: 'Alex', age: 30 }
+
+Simple enough. We create an object, add the properties to it, and return it at the end.
+
+=======
+
+2. with new : 
+
+Let’s create a function that does the same thing, but we want it to be invoked using new. This function will create the same object as the one above. Common practice is to make functions that are meant to be invoked with new start with a capital letter. These functions are also referred to as constructors.
+
+function PersonConstructor(name, age) {
+    this.name = name;
+    this.age = age;
+}
+var alex = new PersonConstructor('Alex', 30);
+o/p : -> { name: 'Alex', age: 30 }
+
+---
+Invoking personFn normally and invoking PersonConstructor with new both result in the same object being created. What’s going on?
+
+The new keyword invokes a function in a special way. It adds some implicit code that we don’t see. Let’s expand the above function to show everything that’s happening. The commented lines are pseudocode representing functionality that is implicitly added by the JS engine when using new.
+
+function PersonConstructor(name, age) {
+    // this = {};
+    // this.__proto__ = PersonConstructor.prototype;
+    // Set up logic such that: if
+    // there is a return statement
+    // in the function body that
+    // returns anything EXCEPT an
+    // object, array, or function:
+    //     return 'this' (the newly
+    //     constructed object)
+    //     instead of that item at
+    //     the return statement;
+    this.name = name;
+    this.age = age;
+    // return this;
+}
+
+Let’s break it down. new:
+
+1. Creates a new object and binds it to the this keyword.
+2. Sets the object’s internal [[Prototype]] property, __proto__, to be the prototype of the constructing function. This also makes it so the constructor of the new object is prototypically inherited.
+3. Sets up logic such that if a variable of any type other than object, array, or function is returned in the function body, return this, the newly constructed object, instead of what the function says to return.
+4. At the end of the function, returns this if there is no return statement in the function body.
+
+in short : 
+When a function is invoked with the new keyword, JavaScript creates an internal this object(like, this = {}) within the function. The newly created this binds to the object being created using the new keyword.
+
+var alex = new PersonConstructor('Alex', 30);
+
+Here the function PersonConstructor is invoked with the new keyword. So the internally created this will be bound to the new object being created here, which is alex.
+
+-----------
+Calling a non-constructor with new
+What happens if we invoke a normal function like personFn using new? Nothing special. The same rules apply. in the case of personFn, we see nothing explicitly happening.
+
+var alex = new personFn('Alex', 30);
+// -> { name: 'Alex', age: 30 }
+
+
+--------------
+ex. 
+
+function Demo() {
+    let obj = {
+	'name' : 'shridhar'
+    }	
+
+    //let arr = ['1','2']
+
+    this.value = 5;
+    return obj
+}
+
+
+new Demo()
+
+
+-------------------------------------
+if : return obj
+
+o/p : {name: 'shridhar'}
+-------------------------------------
+
+if : return arr
+
+o/p : ['1','2']
+
+-------------------------------------
+
+if return is not function, object, array then its always this
+
+if : return 10
+
+o/p: {value: 5}
+
+-------------------------------------
+
+
+function Demo() {
+    value = 5;
+}
+
+new Demo()
+
+o/p : {}  //empty this object, value property not attached to this object.

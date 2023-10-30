@@ -1,0 +1,31 @@
+https://www.educative.io/courses/step-up-your-js-a-comprehensive-guide-to-intermediate-javascript/7nA1nGn3V6A
+
+this is not variable. it is keyword
+this keyword always holds the reference to a single object which is depends on where we are referring.
+
+
+example 2 :
+
+	const Employee = {
+	        firstName : 'sam';
+    		lastName : 'karan';
+		getFullName : function(){
+			console.log(`fullName is ${this.firstName} ${this.lastName} `
+		}
+	}
+
+	Employee.getFullName();   -> o/p: fullName is sam karan
+		here this will pointing to Emplyoee object.
+	
+
+	Now clone the Employee object getFullName() method
+	
+	const getName = Employee.getFullName();
+
+	console.log(getName());  o/p : fullName is undefined undefined
+
+
+	Note: getName() is invoked without any dot operator or new operator. so this is pointing to global window object, thats why it is returning undefind for both firstname and lastname.
+
+	
+	

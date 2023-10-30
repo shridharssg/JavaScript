@@ -1,0 +1,73 @@
+https://www.educative.io/answers/how-garbage-collection-works-in-javascript
+
+
+The JavaScript garbage collector runs automatically, keeps track of memory locations, and determines which memory locations are free (i.e., safe for reuse). The garbage collector uses the mark and sweep algorithm with some optimizations.
+
+Mark and Sweep algorithm
+Reachable objects refer to those objects that are accessible and stored in the memory. A root refers to objects that are inherently reachable, these​ include:
+
+global variables
+local variables of the current function
+parameters of the current function
+Starting from the root, the garbage collector traverses the objects and marks them as visited. The objects which are unreachable from the roots are unmarked and considered garbage (memory reserved for these objects is later freed).
+
+Garbage collector in action
+
+let fruit = {
+  name: "Orange",
+  weight: 130,
+};
+
+let orange = fruit;
+
+Fruit contains a reference to the object:
+
+		 Global
+		/     \
+	       /       \		     
+	     Fruit    Orange
+		\	/
+		 \     /
+		name:Orange
+
+==============================================
+	
+fruit = null;
+
+fruit no longer contains a reference to the object. However, it is still reachable from orange and cannot be treated as garbage.
+
+		Global
+		/     \
+	       /       \		     
+	     Fruit    Orange
+			/
+		       /
+		name:Orange
+
+==============================================
+
+orange = null;
+
+orange no longer contains a reference to the object. The object is now unreachable and the memory that it occupied will be declared safe for reuse by the garbage collector.
+
+
+		Global
+		/     \
+	       /       \		     
+	     Fruit    Orange
+			
+		       
+		name:Orange
+
+The unreferenced object is discovered and the memory that it occupied is freed.
+
+		Global
+		/     \
+	       /       \		     
+	     Fruit    Orange
+
+
+
+
+
+

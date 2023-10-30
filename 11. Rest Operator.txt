@@ -1,0 +1,88 @@
+Rest Parameter
+
+function(ar1, ar2, ...rest)
+
+The rest parameter syntax allows a function to accept an indefinite number of arguments as an array
+
+It used to improve handling of paramters.
+
+
+requirement
+suppose i want perform some calcuation operation like sum, divide etc
+
+function sum(x,y){
+	console.log(x+y)
+}
+
+sum(2,3)
+sum(2,3,5)
+sum(2,3,5,8)
+
+Now user want to pass 3 arguments. then we need to modify the function like need to one more parameter.
+So here every time when number of parameter increase or decrease, accordingly we need to modify the function paramters list.
+
+sum(2,3,5)
+sum(2,3,5,8)  it will return addition of 1st two paramter like 2+3 and ignore other paramters.
+
+
+To overcome this, arguments property and rest paramter used.
+
+1. Arguments property
+
+before spread operator, in ES5, arguments property used to resolve above issue (handle Indefinte number of parametes)
+
+function sum(){
+	console.log(arguments) //it will returns the array kind of syntax which is not complete array. so we can not perform direct operation on that. first we need to convert it in array
+	console.log(Array.isArray(arguments)) // false
+
+	//so first convert arguments into array to perform operation 
+ }
+
+2. Rest operator
+
+here we will pass rest paramter to function with 3 dots (...)
+
+function sum(...values){
+	console.log(values) // ...values it will returns the array with all arguments which we pass at the time of calling function
+	
+	// so we can iterate over the array to perform calculator operation
+	
+	let sum = 0;
+	values.map(val => sum+val)
+	console.log(sum) // it will return the sum of passed arguments
+ }
+
+//so we can say here, with the help of rest operator, the above function capable to handle any number of arguments
+
+sum(2,3)	// [2,3]
+sum(2,3,5)	// [2,3,5]
+sum(2,3,5,8)	// [2,3,5,8]
+
+----------
+
+Differenc ebetween arguments property vs rest operator
+
+1.
+console.log(arguments) //it will returns the array kind of syntax which is not complete array. so we can not perform direct operation on that. first we need to convert it in array
+console.log(values) // ...values it will returns the direct array with all arguments which we pass at the time of calling function. so we can directly perform the operation on it
+
+2. if we want to pass 1st parameter as a variable and then argument.
+	like calculation(sum, 1,2)
+
+	arguments : its not allowed to pass 1st parametr as variable. it consider all parameters as a arguments.
+
+	rest : its allowed to pass number of varibles as a paramter. but rest operator should be last parameter.
+		ex. 	like calculation(sum, 1,2)
+-----------------
+
+	
+Differenc ebetween spread operator vs rest operator
+
+syntax 
+
+{...} 3 dots and variable
+
+so syntax for both are same but both are entirely opposite to each other
+
+Spread : uncapped the array elements to single individual elements
+Rest : get list of individual elements into array

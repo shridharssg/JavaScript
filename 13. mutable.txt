@@ -1,0 +1,145 @@
+https://codeburst.io/explaining-value-vs-reference-in-javascript-647a975e12a0
+
+Mutable and Immutable
+
+Mutable : if the value can change, the object called mutable
+
+Immutable : if the value can not change, the object called Immutable
+
+---
+Javascript has 5 data types that are passed by value.
+We’ll also call these primitive types.
+
+Primitive types : String, Number, symbo, Boolean, null,undefined
+		All Primitive types are immutable, its cant change once created
+
+-------
+
+Javascript has 3 data types that are passed by reference,
+We’ll also call these Reference types.
+
+Reference types : Array, Function, and Object
+
+	These are all technically Objects, so we’ll refer to them collectively as Objects.
+	Reference types are mutable, its change, once its created
+	
+
+
+In javaScript, Variable are stored in 2 major datatypes. 
+	Primitves datatype : Primitive values (like string, numbers) are directly stored in the location which varible access
+	Reference datatype : Reference variable like (object, arrays) are stored in the varible location which is pointer to location in memory where object are store
+
+
+Ex. Immutable
+
+let x = 20;	//Can't Change x when we clone
+let y = x;	//it will take as copy
+
+y= y+1;
+
+
+console.log(x); // 20
+console.log(y); // 21
+
+
+Both x and y are sharing diffrent memory location bcz both are primitive datatypes AND primitive types always store in directly in memory.
+So x and y have different memory location. though y created from x, its hold seperate memroy location.
+So whatever task and action performed on Y , it will not impact on x. thats why value of x is same. and this behaviour we can say, it is immutable. 
+X is not changing its original value doestnt matter any other variable is operating on same
+
+----
+
+Ex. Mutable
+
+let a = ['value1', 'value2']
+let b = a; 
+
+here we are copying all values of array a into array b.
+Here a is hold the reference of pointer, b also point the same location where a is pointing
+
+b.push('value3')
+
+o/p
+
+console.log(a); // ['value1', 'value2', 'value3']
+console.log(b); // ['value1', 'value2', 'value3']
+
+So here, we only push new element into array b. but it also impact on array a. its bcz a is mutable so original value is change.
+
+let c = {
+	name : 'veera',
+	city : 'mumbai'
+}
+
+let d = c  //cloned object 
+
+d.age = 2;
+
+console.log(c); //  { name : 'veera', city : 'mumbai', age : 2 }
+console.log(d); //  { name : 'veera', city : 'mumbai', age : 2 }
+
+Here we have added new property in object d but it also change to original object c. bcz objects are mutable
+
+-----------
+
+How to resolved this issue. ?
+//CONVERT MUTABLE TO IMMUTABLE REFERENCE TYPES
+
+let b = a; 
+	rather than directly assigning same location to b, assign new location to b with the help of concate() method.
+
+
+let a = ['value1', 'value2']
+let b = a.concate(); 
+
+b.push('value3')
+
+o/p
+
+console.log(a); // ['value1', 'value2'] 
+console.log(b); // ['value1', 'value2', 'value3']
+
+Here a is immutable. 
+
+----
+
+let c = {
+	name : 'veera',
+	city : 'mumbai'
+}
+
+let d = Object.assign({},c) // Object.assigne(target,source)
+
+d.age = 2;
+
+console.log(c); //  { name : 'veera', city : 'mumbai' }
+console.log(d); //  { name : 'veera', city : 'mumbai', age : 2 }
+
+
+summary, to make array/ obejct to immuatble, used concate() or Object.assign(target,source) methods
+
+let b = a.concate();  // array 
+let d = Object.assign({},c) // object
+================================================================
+
+
+let c = {
+	name : 'veera',
+	city : 'mumbai'
+}
+
+Object.freeze(c)
+
+let a=c
+
+a.name = 'shri'
+
+console.log(a)
+console.log(c)
+
+o/p for both : cant change value
+{
+	name : 'veera',
+	city : 'mumbai'
+}
+

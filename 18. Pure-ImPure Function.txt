@@ -1,0 +1,116 @@
+
+
+
+======================================
+
+
+https://codeburst.io/explaining-value-vs-reference-in-javascript-647a975e12a0
+
+
+Pure Functions
+We refer to functions that don’t affect anything in the outside scope as pure functions. 
+As long as a function only takes primitive values as parameters and doesn’t use any variables in its surrounding scope, it is automatically pure, as it can’t affect anything in the outside scope. 
+All variables created inside are garbage-collected as soon as the function returns.
+
+A function that takes in an Object, however, can mutate the state of its surrounding scope.
+ If a function takes in an array reference and alters the array that it points to, perhaps by pushing to it, variables in the surrounding scope that reference that array see that change. 
+After the function returns, the changes it makes persist in the outer scope. This can cause undesired side effects that can be difficult to track down.
+
+Many native array functions, including Array.map and Array.filter, are therefore written as pure functions. 
+They take in an array reference and internally, they copy the array and work with the copy instead of the original.
+This makes it so the original is untouched, the outer scope is unaffected, and we’re returned a reference to a brand new array.
+
+Let’s go into an example of a pure vs. impure function.
+
+function changeAgeImpure(person) {
+    person.age = 25;
+    return person;
+}
+var alex = {
+    name: 'Alex',
+    age: 30
+};
+
+var changedAlex = changeAgeImpure(alex);
+console.log(alex); // -> { name: 'Alex', age: 25 }
+console.log(changedAlex); // -> { name: 'Alex', age: 25 }
+
+This impure function takes in an object and changes the property age on that object to be 25. 
+Because it acts on the reference it was given, it directly changes the object alex. 
+Note that when it returns the person object, it is returning the exact same object that was passed in.
+ alex and alexChanged contain the same reference. It’s redundant to return the person variable and to store the reference in a new variable.
+
+Let’s look at a pure function.
+
+function changeAgePure(person) {
+    var newPersonObj = JSON.parse(JSON.stringify(person));
+    newPersonObj.age = 25;
+    return newPersonObj;
+}
+var alex = {
+    name: 'Alex',
+    age: 30
+};
+var alexChanged = changeAgePure(alex);
+console.log(alex); // -> { name: 'Alex', age: 30 }
+console.log(alexChanged); // -> { name: 'Alex', age: 25 }
+
+In this function, we use JSON.stringify to transform the object we’re passed into a string, and then parse it back into an object with JSON.parse. By performing this transformation and storing the result in a new variable, we’ve created a new object. There are other ways to do the same thing such as looping through the original object and assigning each of its properties to a new object, but this way is simplest. The new object has the same properties as the original but it is a distinctly separate object in memory.
+
+When we change the age property on this new object, the original is unaffected. This function is now pure. It can’t affect any object outside its own scope, not even the object that was passed in. The new object needs to be returned and stored in a new variable or else it gets garbage collected once the function completes, as the object is no longer in scope.
+
+
+
+---
+
+Test Yourself
+Value vs. reference is a concept often tested in coding interviews. Try to figure out for yourself what’s logged here.
+
+function changeAgeAndReference(person) {
+    person.age = 25;
+    person = {
+        name: 'John',
+        age: 50
+    };
+    
+    return person;
+}
+var personObj1 = {
+    name: 'Alex',
+    age: 30
+};
+
+var personObj2 = changeAgeAndReference(personObj1);
+console.log(personObj1); // -> ?
+console.log(personObj2); // -> ?
+
+The function first changes the property age on the original object it was passed in. 
+It then reassigns the variable to a brand new object and returns that object. Here’s what the two objects are logged out.
+
+console.log(personObj1); // -> { name: 'Alex', age: 25 }
+console.log(personObj2); // -> { name: 'John', age: 50 }
+
+Remember that assignment through function parameters is essentially the same as assignment with =. 
+The variable person in the function contains a reference to the personObj1 object, so initially it acts directly on that object. 
+Once we reassign person to a new object, it stops affecting the original.
+
+This reassignment does not change the object that personObj1 points to in the outer scope. 
+person has a new reference because it was reassigned but this reassignment doesn’t change personObj1.
+
+An equivalent piece of code to the above block would be:
+
+var personObj1 = {
+    name: 'Alex',
+    age: 30
+};
+var person = personObj1;
+person.age = 25;
+person = {
+  name: 'john',
+  age: 50
+};
+var personObj2 = person;
+console.log(personObj1); // -> { name: 'Alex', age: 25 }
+console.log(personObj2); // -> { name: 'John', age: '50' }
+
+The only difference is that when we use the function, person is no longer in scope once the function ends.

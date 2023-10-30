@@ -1,0 +1,12 @@
+https://www.freecodecamp.org/news/event-bubbling-in-javascript/#:~:text=What%20is%20Event%20Bubbling%3F,gets%20to%20the%20root%20element.
+
+What is Event Bubbling?
+Event Bubbling is a concept in the DOM (Document Object Model). It happens when an element receives an event, and that event bubbles up (or you can say is transmitted or propagated) to its parent and ancestor elements in the DOM tree until it gets to the root element.
+
+When elements receive events (like click), such events propagate/transfer to their parents and ancestors upward in the DOM tree. This is the concept of Event Bubbling, and it allows parent elements to handle events that occur on their children's elements.
+
+Event objects also have the stopPropagation method which you can use to stop the bubbling of an event. This is useful in cases where you want an element to receive a click event only when it is clicked and not when any of its children elements are clicked.
+
+=========
+
+

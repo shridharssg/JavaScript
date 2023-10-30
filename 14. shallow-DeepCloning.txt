@@ -1,0 +1,245 @@
+Shallow vs Deep Copy
+
+How to copy objects in javascript ?
+
+
+call by  reference -> Shallow Copy --> Mutable object		
+
+call by  value -> Deep Copy --> Immutable object		
+
+
+Shallow Copy also identified as call by reference / pass by reference
+and Deep copy means call by value or pass by value
+
+
+----------------
+
+
+
+Shallow Copy
+
+When we make copy of variable from original source and copied into another variable by using simple assignment (=) operator,
+at that time of only reference address or memory address of the original variable is copied into another variable, not the actual value.
+
+so at the end, both variable original and cloned, refered to same value.
+
+So when you make a change in the new variable its also change to original variable
+
+So javascript does a shallow copy by default for non primitive type.
+
+Non primitive means objects, function, array
+
+------------------------------------------
+
+Deep Copy
+	It is also identified as call by value / pass by value
+
+	When we make copy of variable from original source and copied into another variable by using simple assignment (=) operator, at that time all values 
+	of objects or array along with referecne address of the original varible are copied into another variable.
+	
+	so at the end both variable original and cloned, reffered to different reference value.
+	So when you make a change in the new variable its not change to original variable
+
+So Deep copy means if we do any change on copied variable then its not effect on original variable. bcz they shared different memory location.	
+
+
+==============
+Non primitive types 
+	create shallow or deep copy based on the methods which is used to copy.
+
+
+Primitive Types	
+
+	So there is no funda deep or shallow copy applicable for Primitive data type
+	Primitive Types are immutable and its always create deep copy...
+
+=======================================================
+
+Different methods to copy one object into another object
+
+
+1. Simple Assignment Operator
+	
+A. Primitive Types
+	
+	let originalValue = 10;
+	let copiedValue = originalValue ;
+
+	copiedValue = 20;
+
+	console.log( originalValue ) -> 10
+	console.log( copiedValue  ) -> 20
+
+	So here, number is primitive datatype. 
+	though we change value of copiedValue variable, its not impacting on originalValue variable. bcz primitive type always perform deep copy.
+
+B. Non Primitive Types (shallow copy example)
+
+	let originalObj = {
+		name : 'sam',
+		age : 20	
+	}
+
+	let copiedObj = originalObj;
+
+	copiedObj.name = 'karan'
+
+	console.log( originalObj )  -> o/p : { name : 'karan', age : 20 }
+	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20 }
+
+So here we change the name property of copiedObj object. But will also affect on originalObj.
+This is one example of sahllow copy.
+
+
+-----------
+
+Deep copy example
+
+2. JSON.stringify()
+
+	let originalObj = {
+		name : 'sam',
+		age : 20	
+	}
+	
+	let copiedObj = JSON.parse(JSON.stringify(originalObj));
+
+	
+	copiedObj.name = 'karan'
+
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20 }
+	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20 }
+
+So, here JSON.stringify() perform the deep copy.
+
+
+Disadvantage of above method
+
+	
+	 let originalObj = {
+		name : 'sam',
+		age : 20,
+		getName : function(){
+			return this.name;
+		}
+	}
+	
+	let copiedObj = JSON.parse(JSON.stringify(originalObj));
+
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20, getName : f }
+	console.log( copiedObj  )   -> o/p : { name : 'sam', age : 20 }			-> missing getName function key.
+
+
+Note : 
+
+if object contain any method as a property, then JSON.stringify will not copy object accuratly. copied obj will miss the function property.
+So  JSON.stringify() used to perform deep copy only when object doesnt have any function property.
+
+----
+
+3. Object.assign()
+
+	let originalObj = {
+		name : 'sam',
+		age : 20,
+		getName : function(){
+			return this.name;
+		}
+	}
+
+	let copiedObj = Object.assign({}, originalObj) 
+
+	
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20, getName : f }
+	console.log( copiedObj  )   -> o/p : { name : 'sam', age : 20, getName : f }  
+	
+	here copiedObj contain all property properly
+
+	
+	copiedObj.name = 'karan'
+	
+	
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20, getName : f }
+	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20, getName : f }   
+
+	So, here name property only change in copiedObj not in originalObj.
+
+	
+Disadvatage:
+	Here also, Object.assign() function not provide the full deep copy. it will provide partial deep copy
+
+	ex. suppose, object is not simple key property, it has nested key property like address in below example
+
+	
+	let originalObj = {
+		name : 'sam',
+		age : 20,
+		getName : function(){
+			return this.name;
+		},
+		address : {
+				city :'Mumbai',
+				country : 'India'
+			}
+	}
+
+	let copiedObj = Object.assign({}, originalObj) 
+
+	copiedObj.name = 'karan'
+	copiedObj.address.city = 'Pune'
+
+	
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20, address: {city :'Pune', country : 'India'}, getName : f }
+	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20, address: {city :'Pune', country : 'India'}, getName : f } 
+
+So, here, name is not reflected in originalObj, but city modified for both object. Means Object.assign() function not properly work for nested object.
+
+
+4. Spread Operator
+
+	let originalObj = {
+		name : 'sam',
+		age : 20,
+		getName : function(){
+			return this.name;
+		},
+		address : {
+				city :'Mumbai',
+				country : 'India'
+			}
+	}
+
+	let copiedObj = (...originalObj)
+
+	copiedObj.name = 'karan'
+	copiedObj.address.city = 'Pune'
+	
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20, address: {city :'Pune', country : 'India'}, getName : f }
+	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20, address: {city :'Pune', country : 'India'}, getName : f } 
+
+	So, it also same like object.assign() function. means its also perform partially deep copy.
+
+
+Achive full deep copy by using Spread Operator
+	
+	
+	let copiedObj = (...originalObj)
+	
+	copiedObj = {
+		...copiedObj,
+		name : 'karan',
+		address : {
+			...copiedObj.address,
+			city : 'Pune'
+		}
+	}
+
+	
+	console.log( originalObj )  -> o/p : { name : 'sam', age : 20, address: {city :'Mumbai', country : 'India'}, getName : f }
+	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20, address: {city :'Pune', country : 'India'}, getName : f } 
+
+So, by using this way, full deep copy we can achieve. but by default, spread operator also give partially deep copy.
+
+
+There are some library to achive same like lodash, or we can create our own custom function.
+in lodash, we can use cloneDeep method to achive the full deep cloning.

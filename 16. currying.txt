@@ -1,0 +1,51 @@
+Currying is a process in functional programming in which we can transform a function with multiple arguments into a sequence of nesting functions. 
+It returns a new function that expects the next argument inline.
+
+In other words, when a function instead of taking all arguments at one time, takes the first one and return a new function that takes the second one and returns a new function which takes the third one, and so forth, until all arguments have been fulfilled.
+
+
+function sum(x){
+	return function(y){
+		return x+y;
+	}
+}
+
+
+sum(10)(20);
+
+o/p : 30
+
+========
+
+
+let users = {
+	fname : 'shridhar',
+	lname : 'gadhave',
+	city : 'pune'
+}
+
+
+function getUserData(data){
+	return function(key){
+		return data[key];
+	}
+}
+
+
+const userData = getUserData(users)
+console.log(userData('fname'))
+console.log(userData('lname'))
+
+
+
+without currying
+
+function getUserData(data,key){
+	return data[key]
+}
+
+
+console.log(getUserData(users ,'fname'))
+console.log(userData(users ,'lname'))
+
+here, for each function call, need to pass users object. 

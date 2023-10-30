@@ -1,0 +1,134 @@
+
+setInterval()
+	Its repeats a given function at every given time-interval.
+
+setTimeout() 
+	It is to schedule execution of a one-time callback after delay milliseconds
+
+setImmediate()
+	It is to schedule the immediate execution of callback after I/O events callbacks and before setTimeout and setInterval .
+
+process.nextTick()
+
+When in Node JS, one iteration of the event loop is completed, This is known as a tick. 
+process.nextTick() taking a callback function which is executed after completing the current iteration/tick of the event loop.
+
+process.nextTick ( ) schedule a callback function to be executed in next iteration of event loop.
+
+
+When we use process.nextTick ( ) ?
+
+To clean up unwanted resources.
+To allow users to handle errors.
+To try a request to run before starting the next iteration of the event loop.
+Allow a callback to run after the call stack and before the next iteration of the event loop.
+
+================================================
+
+
+setTimeout() is an asynchronous
+
+setTimeout() is an asynchronous function, meaning that the timer function will not pause execution of other functions in the functions stack. 
+In other words, you cannot use setTimeout() to create a "pause" before the next function in the function stack fires.
+
+
+setTimeout(() => {
+  console.log("this is the first message");
+}, 5000);
+setTimeout(() => {
+  console.log("this is the second message");
+}, 3000);
+
+
+// Output:
+
+// this is the second message
+// this is the first message
+
+
+Notice that the first function does not create a 5-second "pause" before calling the second function. Instead, the first function is called, but waits 5 seconds to execute. 
+While the first function is waiting to execute, the second function is called, and a 3-second wait is applied to the second function before it executes. 
+
+===============
+
+Passing Arguments
+
+syntax
+
+// For: func(arg1, arg2, arg3, ...)
+
+// We can use: setTimeout(func, delay, arg1, arg2, arg3, ...)
+
+eg. 
+
+// example2.js
+const rocks = who => {
+  console.log(who + ' rocks');
+};
+
+setTimeout(rocks, 2000, 'Node.js');
+
+================
+
+Cancelling Timers
+
+Because calling a timer function schedules an action, that action can also be cancelled before it gets executed.
+
+A call to setTimeout returns a timer “ID” and you can use that timer ID with a clearTimeout call to cancel that timer. Here’s an example:
+
+const timerId = setTimeout(
+  () => console.log('You will not see this one!'),
+  0
+);
+
+clearTimeout(timerId);
+
+This timer is supposed to fire after 0 ms (making it immediate), but it will not because we are capturing the timerId value and canceling it right after with a clearTimeout call. so console.log() will not called
+
+for setImmediate -> clearImmediate(timerId);
+for setInterval -> clearInterval(timerId);
+
+================
+
+setImmediate will consider 0 ms if delay is not provide.
+
+setImmediate(
+  () => console.log('I am equivalent to setTimeout with 0 ms'),
+);
+
+
+=================
+
+check both
+
+setTimeout(function() {
+  console.log('setTimeout')
+}, 0)
+
+setImmediate(function() {
+  console.log('setImmediate')
+})
+
+o/p : 
+
+setTimeout
+setImmediate
+
+---
+
+setTimeout(function() {
+  setTimeout(function() {
+    console.log('setTimeout')
+  }, 0);
+  setImmediate(function() {
+    console.log('setImmediate')
+  });
+}, 10);
+
+
+O/p : 
+
+setImmediate
+setTimeout
+
+==========

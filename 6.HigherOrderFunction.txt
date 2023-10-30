@@ -1,0 +1,124 @@
+
+Function first class citizen :
+
+	function show(){}
+
+	const show = function(){}
+
+	function display(show){}
+
+	function display(){
+		return show
+	}
+
+So we can create funation as normal way, 
+we can pass to varible
+we can pass function as a argument for function
+we can also return a function inside a function
+
+so we can do anything with function, so thats y function is called as First class citizen
+
+=======================
+
+Higher Order Function
+	A function that takes another function as a argument or a function returns another function as a output in such case, that function act as a Higher order Function
+
+function x(fn){
+	fn()
+}
+
+function y(){
+	console.log("hiii")
+}
+
+x(y)  -> o/p : hiii
+
+here y function is passed as an agrument to x function. here x is taking y as a argument. 
+so a function which taking another function as argument or return a function as a output is called HIgher order function.
+
+in above ex. 
+x is higher order function 
+and y is callback function
+
+============================================
+
+Where should we use higher order function
+
+
+ex. 
+	const data = [5,50,500]
+
+req 1. write program to make each number double
+req 2. write program to add 1 in each number
+
+
+const cal_square = function(val){
+	const outout = [];
+	for(let i=0; i<=val.length; i++){
+		output.push[val[i] * 2]
+	}	
+	return output;
+}
+
+cal_square(data)
+
+o/p : [10, 100, 1000]
+
+----
+
+2. 
+
+const cal_add = function(val){
+	const outout = [];
+	for(let i=0; i<=val.length; i++){
+		output.push[val[i] + 1]
+	}	
+	return output;
+}
+
+cal_add(data)    o/p : [6,51,501]
+
+
+so if you observe here, for both program we write same thing but only output.push() are changed in both places..
+
+So same thing we can achieve by using Higher order function..
+
+
+function cal_square(val){
+ return val *2 
+}
+
+
+function cal_add(val){
+ return val + 1
+}
+
+const calculator = function(val, fn){
+	const output = [];
+	for(let i=0; i<=val.length; i++){
+		output.push( fn(val[i]) )
+	}	
+	return output;
+}
+
+
+calculator( data, cal_square )	  o/p : [10, 100, 1000]
+calculator( data, cal_add )       o/p : [6,51,501]
+
+So in above example, we move our logic inside cal_square and cal_add function. and common code moved into calculator function..
+
+calculator( data, cal_square )
+	here we pass cal_square function as a argument to calculator function.
+
+	so calculator is higher order function and cal_square is callback function..
+
+
+Same thing we can also achieve by using map function..
+
+	const result =  data.map(cal_square)
+	const result =  data.map(val=> val*2)
+
+	console.log(result) // [10, 100, 1000]
+
+here map is higher order function and  cal_square is callback function
+

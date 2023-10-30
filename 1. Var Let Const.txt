@@ -1,0 +1,173 @@
+ES5 : Var
+ES6 : let and const
+
+Variables declared with "var" are function scoped
+"let" and "const" are block scoped
+
+
+Scope : 
+	It decides the accessibility of data whether it can use here or 
+	not and curly braces create a block.
+
+
+{
+	define a block
+}
+
+---
+
+Before ES6
+Only functions can create a scope. 
+everything inside function is private and outside the function is global or public
+
+Global means available for whole window
+
+Inside function : private
+Outside function : global/ public
+
+
+Difference and drawbacks of var 
+
+1. if we called let variable before declaration, then it will throw the error like "cannot access varible before initialization"
+but if we called var varible before declaration, then it will not throw any error, it will return 'undefined'
+
+
+ex
+ES5	
+	console.log(title) 	// o/p : undefined
+	var title = "angular"  
+
+ES6
+	console.log(heading) 	// o/p : error
+	let heading = "angular"  
+
+-----------
+
+2. 
+
+var firstName = 'John'
+function getName(){
+	var firstName = 'Peter'
+	console.log("Inside function ", firstName)
+}
+
+getName();
+console.log("Outside function ", firstName)
+
+o/p : 
+Inside function Peter
+Outside function John
+
+Explanation :
+firstName = 'John' is created outside the function so it has a global scope
+firstName = 'Peter' is created inside the function so it has a private scope (varibles declared with var, inside function has always private scope)
+
+---
+
+
+var firstName = 'John'
+if(1==1){
+	var firstName = 'Peter'
+	console.log("Inside function ", firstName)
+}
+
+console.log("Outside function ", firstName)
+
+o/p : 
+Inside function Peter
+Inside function Peter
+
+Explanation :
+Only function can create the private scope with var keyword, expect function, no one can create the private scope.
+here, if block is created. so scope of 	var firstName = 'Peter' is global not private.
+
+so it will override the value of firstName and output of both is "Inside function Peter"
+
+Note : with var keyword, we can redeclared the varible. here we declared var firstName in outside as we as inside if block
+
+3. 
+Why let keyword ?
+in above example, console.log("Outside function ", firstName) is expect name is John. but due to declare inside if block, it is override.
+to overcome this, we can use the let keyword.
+
+let firstName = 'John'
+if(1==1){
+	let firstName = 'Peter'
+	console.log("Inside function ", firstName)
+}
+
+console.log("Outside function ", firstName)
+
+o/p : 
+
+Inside function Peter
+Outside function John
+
+Explanation :
+	varible declared inside any block (if, for, function) has always private scope.
+	so inside if block, it print firstName is 'peter' , and outside block its print 'John'
+
+
+
+
+var i = 100;
+
+for(var i=0; i<=5; i++){
+	console.log(i); //private scope only create inside function. so here it will global scope. so value of i is override to 0 first
+}
+console.log("Outside for ", i)
+
+
+o/p : 1 2 3 4 5 Outside for 6
+
+
+
+let i = 100;
+
+for(let i=0; i<=5; i++){
+	console.log(i); //block level scope for i 
+}
+
+console.log("Outside for ", i) //global scope for i
+
+
+o/p : 1 2 3 4 5 Outside for 100
+
+4.
+declaration in same scope
+	
+var firstName = 'John'
+var firstName = 'peter'
+
+	With var keyword, we can redeclared the same variable in same scope or different scope
+
+
+let firstName = 'John'
+let firstName = 'peter'
+	with let keyword, we can declared in diffrent scope.
+	With let keyword, we can not redeclared the same variable in same scope but we can reinitiliase it (error : identifier firstName already declare)
+
+let lasttName = 'John'
+    lastName = 'peter'
+
+-----------------------------------
+
+
+Const : 
+	It is same like let, only difference is that, once varible declared with const, cant not re initialize it in same scope
+
+
+let firstName = 'John'
+ firstName = 'peter'  // re initialize allowed
+
+
+const maxUpload = 100
+ maxupload = 200  // re initialize not allowed error : Assignvment to constant variable
+
+
+other differece between var and let is same for const.
+==============================================================
+
+
+
+

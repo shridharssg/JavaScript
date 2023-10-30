@@ -1,0 +1,180 @@
+Call Apply Bind
+
+
+first understand the situation,
+
+const Employee = {
+	        firstName : 'sam';
+    		lastName : 'karan';
+		getFullName : function(){
+			console.log(`fullName is ${this.firstName} ${this.lastName} `
+		}
+	}
+
+	Employee.getFullName();   -> o/p: fullName is sam karan
+		here this will pointing to Emplyoee object.
+	
+
+	Now clone the Employee object getFullName() method
+	
+	const getName = Employee.getFullName();
+
+	console.log(getName());  o/p : fullName is undefined undefined
+
+
+	Note: getName() is invoked without any dot operator or new operator. so this is pointing to global window object, thats why it is returning undefind for both firstname and lastname.
+
+
+So here, if we called 
+	Employee.getFullName() then this pointing to Employee object
+and 	after clone, getName(), hete this pointing to global window object.
+
+	So here, in 2nd scanario, this object is loose the Employee object reference.
+
+
+
+*** To avoid such scanario, we can use the Call Apply Bind function.
+
+
+These 3 methods used to set this keyword independant of how to function called.
+
+
+=============
+ex. 2
+
+const employee = {
+	        firstName : 'sam';
+    		lastName : 'karan';
+		getFullName : function(){
+			console.log(`fullName is ${this.firstName} ${this.lastName} `
+		}
+	}
+
+const customer = {
+	        firstName : 'joss';
+    		lastName : 'buttler';
+		getFullName : function(){
+			console.log(`fullName is ${this.firstName} ${this.lastName} `
+		}
+	}
+
+
+Function Borrowing : 
+	Here in both object getFullName method repeated. So its not right approach. so we will remove getFullName method from customer object and customer object will 
+	borrow that method from employee object. this concept called function borrowing.
+	function borrowing allows us to use method of one object into different object without maintaing copy of same method in different places.
+
+	To achieve this function borrowing, we have 3 methods : Call Apply Bind
+
+const customer = {
+	        firstName : 'joss';
+    		lastName : 'buttler';		
+	}
+
+customer object without getFullName method.
+
+===================================
+
+So here employee object has getFullName method and customer object want to call that method. to achieve these, need to bind getFullName method to customer object.
+
+
+Call : 
+
+syntax
+objectName.methodname.call(object)
+	objectName : name of object in which menthod exist
+	methodname : name of method which need to invoked
+	object : name of object which u want to used.
+
+Im binding the context of this(customer object) with the help of call function, 
+so whenever u used call, need to pass name of object which u want to used. so here we will use customer object
+
+employee.getFullName.call(customer);
+
+so when these function exist, it will point to customer object so o/p is "joss buttler"
+
+Note : In these way, without help of inheritance or writting code multiplaces we called the method of another object with the concept of fucntion borrowing and for that we used call method.
+
+
+Apply : 
+	Same thing we can also achieve by using apply().
+
+	employee.getFullName.apply(customer);
+
+
+difference between call and apply ?
+
+if both function doing same things then what is exactly difference between them ?
+
+	Both function are different based on argument.
+Call : pass argument as comma seperated
+Apply : pass argument as array
+
+eg. 
+
+const employee = {
+	        firstName : 'sam';
+    		lastName : 'karan';
+		getFullName : function(city){
+			console.log(`fullName is ${this.firstName} ${this.lastName} staying in ${city} `
+		}
+	}
+
+
+employee.getFullName.call(customer,'Pune');       o/p : fullName is joss buttle staying in Pune
+employee.getFullName.apply(customer,['Mumbai']);  o/p : fullName is joss buttle staying in Mumbai
+
+--------------
+
+We can also write getFullName method seperatly and reuse in both object
+
+
+const getFullName = function(){
+			console.log(`fullName is ${this.firstName} ${this.lastName} staying in ${city} `
+		}
+
+const employee = {
+	        firstName : 'sam';
+    		lastName : 'karan';
+	}
+
+const customer = {
+	        firstName : 'joss';
+    		lastName : 'buttler';
+	}
+
+getFullName.call(employee, 'Pune')   o/p : sam karan staying in Pune
+getFullName.apply(customer,['Mumbai'])  o/p : joss buttler staying in Mumbai
+
+Here both will execute only once. if you want to execute again , then again we need to write whole line.
+
+==========================
+
+Bind()
+
+whenever we write call or apply, it will execute immediatly. But suppose we want bind now but execute later based on some condition or event trigger like function call, button call
+in that situation, bind() used. 
+with bind(), we can invoke these number of times, not need to write again and again.
+parameter pass as a comma seperated
+
+const handler = getFullName.bind(customer)
+handler() 
+
+
+so here customer object bind with getFullName but it will not execute until handler() called.
+so whener we want to execute it, just call the handler() with required parameter
+
+eg. handler('Mumbai')
+eg. handler('Pune')
+
+we can this handler() on button click also
+
+				call 				apply					bind
+
+Execution		At the time of binding		At the time of binding			At the time when we execute the return func
+
+Parameter		comma seperated			Array []				comma seperated
+
+is Return Function	yes, it returns and 		same as call				yes, it returns and calls the same func whenever need
+			calls the same func at
+			the time of binding

@@ -1,0 +1,227 @@
+All this functions used with array
+
+map
+	* As the name suggest,map function basically used to map every elements of array and then transform it based on our logic.
+
+	* The map() method created a new array populated with the results of calling a provied function on every
+	  element in the calling array		
+
+	* resulting array has same length as like original array -- check this
+	* Does not change the original array
+
+
+	const users = ['sam', 'karan', 'joss'] //convert to uppercase
+
+	way 1.
+
+		function convertToUpper(val){
+			return val.toUpperCase();
+		}
+	
+		const newUser = users.map(convertToUpper);
+
+		//map function takes another function as a argument (//higher order function)
+
+		console.log(newUser) // o/p : ['SAM', 'KARAN', 'JOSS'] 
+		
+		// here map function individual element and convert it into uppercase based on logic.
+
+	way 2.
+		instead of calling function as a argument, directly write annonymous function as a argument
+
+			const newUser = users.map(function convertToUpper(val){
+				return val.toUpperCase();
+			});
+
+	way 3.
+		used arrow function
+			const newUser = users.map((val)=> val.toUpperCase());
+		
+	
+
+	example 2 complex object
+		
+		const emp = [
+			{'id' : 1, 'name' : 'sam', 'profile':'Developer'},
+			{'id' : 2, 'name' : 'karan', 'profile':'Developer'},
+			{'id' : 3, 'name' : 'joss', 'profile':'Tester'},
+		]
+
+		const newEmp = emp.map((val)=> val.name.toUpperCase());
+		
+
+		same thing we can achieve by using forEach loop.
+
+		let result = [];
+
+		emp.forEach(function(val){
+			 result.push(val.name.toUpperCase())
+		 })
+
+
+		forEach loop :  we need to create one empty array and manually need to push value in it
+		map()        : no need to create seperate empty array and no need to push element in it.
+
+
+	Note : 
+		In Map(), resulting array has same length as like original array
+
+		so here we want only Tester user in result. so if we used map function then it will return true false based on condition
+
+		const newEmp = emp.map((val)=> {
+			return val.profile == 'Tester';
+		}
+
+		console.log(newEmp)
+
+	o/p : [false, false, true]
+
+	to overcome this, we can used filter ().
+
+=============================================================================
+
+
+filter
+	*The filter() method creates a new array with all elements that pass the test (filter condition) implemented by the provided function.
+
+	*Does not change the original array
+
+	* it is used when we want specific records from array based on some condition,
+	* length of new array may b not same 
+
+	const emp = [
+		{'id' : 1, 'name' : 'sam', 'profile':'Developer'},
+		{'id' : 2, 'name' : 'karan', 'profile':'Developer'},
+		{'id' : 3, 'name' : 'joss', 'profile':'Tester'},
+	]
+
+	so here we want only Tester user in result.
+
+	const newEmp = emp.filter((val)=> {
+		return val.profile == 'Tester';
+	}
+
+	console.log(newEmp)
+
+	o/p : [{'id' : 3, 'name' : 'joss', 'profile':'Tester'}]
+
+=============================================================================
+
+reduce
+	* The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
+	* reduce() also runs the callback for each element of array and return single value at the end
+	* Does not change the original array
+	
+	
+	
+	old way : 
+
+		const score = [100,200,300]
+
+		let sum = 0;
+
+		for(let i=0; i<score.length; i++){
+			console.log( score[i])
+			sum = sum+ score[i]
+		}
+
+		console.log("Sum : ", sum) 
+		o/p : Sum : 600
+-------
+
+	By using reduce()
+		
+				const result = score.reduce(function(accumator, val){
+					return accumator + val;
+				}, 0)
+
+				or
+				
+				const result = score.reduce((accumator, val) => accumator + val ,0)
+				
+				console.log("Sum : ", result ) 
+				o/p : Sum : 600
+
+				here 
+				accumator : is used to hold the result same like sum variable which created in old way approach
+				 val	: it is pointing to array elements for each iteration
+				0 : it is default value of accumator same like let sum=0;
+					so for first iteration, here accumator set to default 0
+						return accumator + val;  -> return 0+100;
+
+					2nd iteration, now accumator holds 100
+						return accumator + val;  -> return 100+200;
+=================================================
+
+Combine all function in single
+
+	
+
+	const emp = [
+		{'id' : 1, 'name' : 'sam', 'profile':'Developer', 'bonus1' : 500, 'bonus2': 1300},
+		{'id' : 2, 'name' : 'karan', 'profile':'Developer', 'bonus1' : 300, 'bonus2': 1100},
+		{'id' : 3, 'name' : 'joss', 'profile':'Tester', 'bonus1' : 600, 'bonus2': 1500}
+	]
+
+	1. first get 'profile':'Developer' emp
+
+		const result1= emp.filter(val => val.profile == 'Developer')
+
+	2. get sum of bonus1 + bonus2 for each emp from above result 
+		
+		const result2= result1.map(val => val.bonus1 + val.bonus2)
+
+	3. get total bonus given to emp from company from above result
+		
+		const result3 = result2.reduce((accumator, val) => accumator + val ,0)
+
+
+	combine all this 3 methods in sinle line
+		
+			const finalResult= emp.filter(val => val.profile == 'Developer')	
+							.map(val => val.bonus1 + val.bonus2)
+							.reduce((accumator, val) => accumator + val ,0)
+ 
+			console.log(finalResult) // o/p : 3200
+	
+
+
+	same thing we can achieve bu using single reduce()
+	
+
+	const r2 = emp.reduce(function(accumator, val){
+					let abc = 0
+					if(val.profile == 'Developer'){		
+						abc = val.bonus1 + val.bonus2;									
+					}
+					return accumator + abc
+					
+				}, 0)
+	
+	console.log(r2)
+	
+
+=======================
+
+diff between map and forEach
+
+map only works with array.
+it returns array only and length of new array also same 
+simple to return
+
+foreach works with object also - check
+it may return array, single varible
+need to create variable or array then push elements into it.
+new array length may b change
+it is asynchronous in nature
+
+for loop
+it is synchronous in nature
+
+
+check performance with map vs foreach
+check synchronous with above
+
+
+
+

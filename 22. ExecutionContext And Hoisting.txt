@@ -1,0 +1,273 @@
+Execution Context in JavaScript
+
+https://www.freecodecamp.org/news/javascript-execution-context-and-hoisting/
+in depth : https://medium.com/@happymishra66/execution-context-in-javascript-319dd72e8e2c
+
+
+In general, a JavaScript source file will have multiple lines of code. 
+As developers, we organize the code into variables, functions, data structures like objects and arrays, and more.
+
+----------
+Lexical Environment : 
+	In JavaScript, a Lexical Environment is where your code is physically written. 
+	Usually, there will be more than one Lexical Environment in your code. However, not all the environments get executed at once.
+
+	In the example below, the variable name is lexically inside the function sayName().
+
+	function sayName() {
+		  let name = 'someName';
+  		  console.log('The name is, ', name);
+	 }
+----------
+
+Execution Context:
+JavaScript creates an environment to execute the code we write. It takes care of the memory creation for variables, functions, objects, and so on in the creation phase. Finally it executes the code in the execution phase. This special environment is called the Execution Context.
+
+===============
+
+There are two types of execution contexts:
+	Global Execution Context (GEC)
+	Function Execution Context (FEC)
+
+And each of the execution contexts has two phases:
+	Creation Phase
+	Execution Phase
+
+==============
+
+Global Execution Context (GEC) in JavaScript
+	Whenever we execute JavaScript code, it creates a Global Execution Context. 
+	The global execution context has two phases. creation and Execution
+
+	This is the default execution context in which JS code start its execution when the file first loads in the browser. 
+	All of the global code i.e. code which is not inside any function or object is executed inside the global execution context. 
+	GEC cannot be more than one because only one global environment is possible for JS code execution as the JS engine is single threaded.
+
+Creation Phase
+	In the creation phase, two unique things get created:
+
+	A global object called window
+	A global variable called this
+
+If there are any variables declared in the code, the memory gets allocated for the variable and variable gets assigned with undefined.  
+If there is a function in the code, it gets placed directly into the memory
+
+
+Execution Phase
+The code execution starts in this phase. Here, the value assignment of the global variables takes place. 
+Please note that no function gets invoked here as it happens in the Function Execution Context. We will see that in a while.
+
+Let's understand both the phases with examples.
+
+var name = 'shridhar';
+
+function display() {
+  console.log(this.name); 
+}
+
+In the creation phase of GEC:
+
+	The global object window and the variable this get created.
+	Memory gets allocated for the variable name and the function display.
+	The variable name gets initialized by a special value undefined. The function display gets placed in the memory directly.
+
+In the execution phase:
+
+	The value shridhar is assigned to the variable name.
+	As we have defined the function but not called it yet, the function execution does not take place.
+
+We will call the function and see what happens when we learn about the Function Execution Context.
+
+==============
+
+Function Execution Context (FEC): 
+	Functional execution context is defined as the context created by the JS engine whenever it finds any function call. 
+	Each function has its own execution context. It can be more than one. 
+	Functional execution context has access to all the code of the global execution context though vice versa is not applicable.
+	While executing the global execution context code, if JS engine finds a function call, it creates a new functional execution context for that function.
+	In the browser context, if the code is executing in strict mode value of this is undefined else it is window object in the function execution context.
+eg : 
+
+var name = 'shridhar';
+
+function display() {
+  console.log(this.name); 
+}
+
+// Let us call the function
+
+display();
+
+--------------
+
+The function execution context goes through the same phases, creation and execution.
+
+The function execution phase has access to arguments. It is the arguments passed to the function. In our example, there are no arguments passed.
+
+Please note that the window object and the this variable created in the Global Execution Context are still accessible in this context.
+
+When a function invokes another function, a new function execution context gets created for the new function call. 
+Each of the function execution contexts determines the scope of the variables used in the respective functions.
+
+==================
+
+Execution context stack (ECS): 
+Execution context stack is a stack data structure, i.e. last in first out data structure, to store all the execution stacks created during the life cycle of the script. 
+Global execution context is present by default in execution context stack and it is at the bottom of the stack. 
+While executing the global execution context code, if JS engines find a function call, it creates a functional execution context for that function and pushes it on top of the execution context stack. 
+JS engine executes the function whose execution context is at the top of the execution context stack. Once all the code of the function is executed, JS engines pop out that function’s execution context and start’s executing the function which is below it.
+
+Let’s understand this with the help of an example:
+
+var a = 10;
+
+function functionA() {
+
+	console.log("Start function A");
+
+	function functionB(){
+		console.log("In function B");
+	}
+
+	functionB();
+
+}
+
+functionA();
+
+console.log("GlobalContext");
+
+
+explanation
+
+step 1:
+1. As soon as the above code loads into the browser, JS engine pushes the global execution context in the execution context stack.
+ 
+2. When functionA is called from global execution context, JS engine pushes functionA execution context in the execution context stack and starts executing functionA.
+
+3. When functionB is called from functionA execution context, JS engine pushes functionB execution context in the execution context stack. Once all the code of functionB gets executed, JS engine pops out functionB execution context. After this, as functionA execution context is on top of the execution context stack, JS engine starts executing the remaining code of functionA.
+
+4. Once all the code from functionA gets executed, JS engine pops out functionA execution context from execution context stack and starts executing remaining code from the global execution context.
+
+When all the code is executed JS engine pops out the global execution context and execution of JavaScript ends.
+
+execution context stack
+
+|-----------------------------|
+|			      |
+|			      |
+|-----------------------------|
+|			      |
+|functionB execution context  |
+|-----------------------------|
+|			      |
+|functionA execution context  |
+|-----------------------------|
+|			      |
+| global execution context    |
+|-----------------------------|
+
+=========================================================
+
+
+Hoisting in JavaScript
+----------------------------------
+Variable Hoisting in JavaScript
+
+console.log(name);
+var name;
+
+o/p : undefined
+However, the question is why? The answer lies in the execution context.
+
+In the creation phase,
+	The memory gets allocated for the variable name, and A special value undefined is assigned to the variable.
+
+In the execution phase,
+	The console.log(name) statement will execute.
+
+--------
+Variable Hoisting
+	This mechanism of allocating memory for variables and initializing with the value undefined at the execution context's creation phase is called Variable Hoisting.
+
+	The special value undefined means that a variable is declared but no value is assigned.
+
+If we assign the variable a value like this:
+
+name = 'shridhar';
+The execution phase will assign this value to the variable.
+
+-------
+
+Function Hoisting in JavaScript
+	Now let's talk about Function Hoisting. It follows the same pattern as Variable Hoisting.
+
+The creation phase of the execution context puts the function declaration into the memory, and the execution phase executes it.
+
+Putting the entire function declaration ahead into the memory at the creation phase is called Function Hoisting.
+
+==
+eg.
+
+// Invoke the function functionA
+functionA();
+
+// Declare the function functionA
+function functionA() {
+ console.log('Function A');
+ // Invoke the function FunctionB    
+ functionB();
+}
+
+// Declare the function FunctionB
+function functionB() {
+ console.log('Function B');
+}
+
+o/p : 
+
+Function A
+Function B
+
+---
+
+The execution context creates the memory for the function and puts the entire function declaration of functionA in it.
+The functions create their own execution context. So a similar thing happens for functionB as well.
+Next, the functions get executed in their execution context respectively.
+
+---
+
+A Few Ground Rules
+
+1. Always define variables and functions before using them in your code. It reduces the chances of surprise errors.
+
+2. Hoisting is only for function declaration, not initialization. Here is an example of function initialization where the code execution will break.
+
+---
+
+logMe();
+
+var logMe = function() {
+  console.log('Logging...');
+}
+
+Explaination : 
+The code execution will break because with function initialization, the variable logMe will be hoisted as a variable, not as function. 
+So with variable hoisting, memory allocation will happen with the initialization with undefined. That's the reason we will get the error:
+
+error : Uncaught TypeError : logMe is not a function
+
+-------------
+
+Let and Const 
+
+Suppose we try to access a variable ahead of declaration and use the let and const keywords to declare it later. 
+In that case, they will be hoisted but not assigned with the default undefined. Accessing such variables will result in the ReferenceError. 
+
+Here is an example:
+
+console.log(name);
+let name;
+
+
+It will throw the error: ReferenceError : name is not defined

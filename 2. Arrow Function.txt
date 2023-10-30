@@ -1,0 +1,178 @@
+Arrow Function (Flat arrow function)
+
+An Arrow Function expression is a compact alternative to a traditional function expression
+
+syntax : () =>
+
+traditional : 
+ function sum(a, b){
+	return a+b;
+}
+
+
+by using Arrow Function
+
+ const sum = (a,b) => a+b;
+
+Note : 
+
+1. arrow function comes with default return keyword. so if function has only one line then no need to write return keyword
+	 const sum = (a,b) => a+b;
+
+2. arrow function with no arguments
+	 const sum = () => 2+3;
+
+3. arrow function with single argument
+	 const sum = (a) => a*a;
+
+4. arrow function with multi line, (need to mentioned return keyword)
+	 const sum = (a,b) => {
+			return a+b;	
+		}
+
+5. arrow function with returning object, need to use () parenthesis
+
+	const getUser = () => ({ 'name': 'shridhar', 'place': 'Mumbai' })
+
+6. arrow function doesnt have its own this. so when we called this inside arrow function, it is always refer to its parent scope 
+
+where to use : 
+
+function addToCart(){
+  this.productName = 'desktop',
+  this.getProductDetails= function () {
+	//console.log(this)
+
+	// option 1 : const that = this
+	console.log("outside setTimeout : ", this.productName);	
+	
+	setTimeout(function(){
+           //console.log(this)
+	   console.log("inside setTimeout : ", that.productName);	
+	   console.log("inside setTimeout : ", this.productName);	
+	
+	}, 1000)
+  }
+};
+		
+
+let obj = new addToCart()
+obj.productName    
+	o/p : 'desktop'
+
+obj.getProductDetails() 
+
+	o/p : outside setTimeout : desktop
+		inside setTimeout : undefined
+
+
+reason : 
+  inside setTimeout : undefined
+
+here, addToCart has 2 properties, productName and getProductDetails and one more normal function inside the getProductDetails which attach to setTimeout.
+
+
+So, value of this inside the getProductDetails is pointing to addToCart() 
+and value of this inside the function of settimeout is pointing to  global window object. so it will return undefined.
+
+option 1 :
+to overcome this situation, we declared 
+	const that = this  //here we hold this reference inside that variable.
+and then inside settimeout, we access property from that variable
+
+	that.productName
+
+----
+
+option 2 : by using arrow function
+arrow function doesnt have this. so it is also refer to parent scope 	
+
+function addToCart(){
+  this.productName = 'desktop',
+
+  this.getProductDetails= function () {
+	console.log(this)
+
+	setTimeout(()=>{
+           //console.log(this)
+	   console.log("inside setTimeout : ", this.productName);	
+	}, 1000)
+  }
+};
+
+-----
+
+7. arrow function doesnt have argument binding 
+
+	where to not use
+
+	regular function support the argument
+
+	eg
+	
+function sum(){
+	console.log(arguments);
+}
+
+sum(2,3)
+sum(2,3,8)
+sum(2,3,10)
+
+
+
+where arrow function used
+
+	1. with promises, we can handle reject or success respone with arrow function
+	2. a. f very powerfull when we want to perform iteration or write logic over again and again on some items.
+	
+
+	ex. names = ["sachin", "sehwag", "sanju"] 
+	here we want to convert name into uppercase, then rather than going through traditional approach, used map function with arrow 
+
+	const result = names.map(name()=> name.upperCase())
+
+where arrow function not used
+	if we have object with method, then inside that method arrow function is not userfull. bcz arrow function doesnt have this. so use regular function.
+
+	const user = {
+		name : 'sehwag'	,
+		getUser : ()=>{
+				console.log(this) // window bcz AF doesnt have its own this, so it will take value of outer scope (window object)
+				console.log(`my name is : ${this.name}`)
+			}
+
+		// getUser : function(){
+		//	console.log(`my name is : ${this.name}`)
+		// }	
+	} 
+
+	o/p : my name is : 
+
+==================================
+function vs method
+	method is declare inside the object. 
+
+function fn() {
+    console.log(this);
+}
+fn() ----> invoked without any dot operator. so it is function.
+
+------
+
+const Employee = {
+	        firstName : 'sam';
+    		lastName : 'karan';
+		getFullName : function(){
+			console.log(`fullName is ${this.firstName} ${this.lastName} `
+		}
+	}
+
+	Employee.getFullName();  ====> here getFullName invoked by using dot operator so it is method
+	
+
+
+
+======		
+
+check method vs function , where arrow function not used
+

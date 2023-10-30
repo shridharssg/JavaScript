@@ -1,0 +1,141 @@
+do...while loop is similar to the while loop. 
+
+The only difference is that 
+	in do…while loop, the body of loop is executed at least once.
+
+do {
+    // body of loop
+} while(condition)
+
+
+---
+
+
+while (condition) {
+    // body of loop
+}
+
+eg.
+
+// program to display numbers from 1 to 5
+// initialize the variable
+
+let i = 1, n = 5;
+
+// while loop from i = 1 to 5
+while (i <= n) {
+    console.log(i);
+    i += 1;
+}
+
+========================================
+
+
+What is the difference between ‘of’ and ‘in’?
+
+For Of: It loops over the Values
+For In: Loops over the Keys
+
+===
+
+const array = [1,2,3,4,5]
+array.six = 6
+array.seven = 7
+
+//This array will now look like [1,2,3,4,5,six:6,seven:7]
+
+
+// OF: iterates over values
+
+
+for (const value of array ) {   
+  console.log(value)
+}
+
+
+// o/p : 
+// 1
+// 2
+// 3
+// 4
+// 5
+
+
+----
+
+// IN: iterates over keys
+
+for (const key in array ) {
+  console.log(key, array[key])
+}
+
+// Logs:
+// '0' 1
+// '1' 2
+// '2' 3
+// '3' 4
+// '4' 5
+// 'six' 6
+// 'seven' 7
+
+---
+
+---
+
+const string = 'str'
+for (const letter of string) {
+  console.log(letter)
+}
+
+// 's'
+// 't'
+// 'r'
+
+
+=========================================
+
+
+For loop vs forEach loop 
+
+For Loop:
+
+The "for" loop used for iterating over arrays, objects, or sequences of values.
+
+It provides more control over the iteration process, allowing you to specify the start and end conditions, as well as the increment or decrement step.
+
+It is typically used when you need to perform a specific action a fixed number of times or when you need fine-grained control over the loop.
+
+It support "break" or "continue" statements for early termination or skipping iterations
+
+for (let i = 0; i < array.length; i++) {
+
+  console.log(array[i]);
+
+}
+
+====
+
+forEach Loop:
+
+The "forEach" loop is a higher-order function available on arrays in JavaScript.
+
+It is specifically designed for iterating over the elements of an array and executing a provided function once for each element.
+
+It is often preferred when you want to perform the same action on each element of an array.
+
+It does not support "break" or "continue" statements for early termination or skipping iterations;
+
+eg.
+
+array.forEach(function (element) {
+
+  console.log(element);
+
+});
+
+
+====
+
+suppose array has 10000 records, and we want to find specific reocrd. at that time once match, we dont want to proceed more. so in this situation
+for loop should be used bcz we can used break statement to check further. 
+but same thing not possible in forEach so it iterate over 10000 records

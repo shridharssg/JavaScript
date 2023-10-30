@@ -1,0 +1,203 @@
+https://dotnettutorials.net/lesson/promise-chaining-in-javascript/
+
+-------------
+
+let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(5);
+            }, 3 * 1000); // (*)
+        });
+        p.then((result) => { //(**)
+            console.log("1st : ",result); // 5
+            return result * 2;
+        }).catch((result) => { //(***)
+            console.log("2nd : ",result); // 10
+            return result * 3;
+        }).then((result) => {
+            console.log("3rd : ",result); // 30
+            return result * 4;
+        }).then((result) => {
+            console.log("4th : ",result); // 120
+            return result * 5;
+        });
+
+o/p : 
+
+1st :  5
+3rd :  10
+4th :  40
+
+here catch() method is not execute.
+===================
+
+let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(5);
+            }, 3 * 1000); // (*)
+        });
+        p.then((result) => { //(**)
+            console.log("1st : ",result); // 5
+            return result * 2;
+        }).catch((result) => { //(***)
+            console.log("2nd : ",result); // 10
+            return result * 3;
+        }).then((result) => {
+            console.log("3rd : ",result); // 30
+            return result * 4;
+        }).then((result) => {
+            console.log("4th : ",result); // 120
+            return result * 5;
+        });
+
+o/p : 
+
+2nd :  5
+3rd :  15
+4th :  60
+
+here inside promise, we called reject(5);. so it will directly jump on catch() method. and after that it will execute next both then() method.
+it will skip 1st then().
+reason of calling then() after catch() : as we know then(), catch(), finally() all this method itself return the promise object.so it will call
+next executer.
+===============================
+
+here reject will execute : passexam = false;
+
+const res = new Promise((resolve, reject) => {
+            const passexam = false;
+                if (passexam) {
+                    resolve("Dad gifted the new mobile.");
+                } else {
+                    reject("Dad has not gifted the mobile.");
+                }
+        });
+
+res.then((result) => {
+            console.log("I'm 1st then")
+        }).catch((result) => {
+            console.log("Im catch")
+        }).then((result) => {
+            console.log("I'm then after catch")
+        })
+
+o/p : 
+Im catch
+I'm then after catch
+
+
+---------------
+
+
+const res = new Promise((resolve, reject) => {
+            const passexam = false;
+                if (passexam) {
+                    resolve("Dad gifted the new mobile.");
+                } else {
+                    reject("Dad has not gifted the mobile.");
+                }
+        });
+
+res.then((result) => {
+            console.log("I'm 1st then")
+        }).catch((result) => {
+            console.log("Im catch")
+	}).finally((result) => {
+            console.log("Im catch again")
+        }).then((result) => {
+            console.log("I'm then after catch")
+        })
+
+o/p : 
+Im catch
+I'm then after catch
+
+here : console.log("Im catch again") will not execute
+===============================
+
+ex. finally() before then()
+
+const res = new Promise((resolve, reject) => {
+            const passexam = false;
+                if (passexam) {
+                    resolve("Dad gifted the new mobile.");
+                } else {
+                    reject("Dad has not gifted the mobile.");
+                }
+        });
+
+res.then((result) => {
+            console.log("I'm 1st then")
+        }).catch((result) => {
+            console.log("Im catch 1st : ", result)
+	}).finally((result) => {
+            console.log("Im finally befor then again")
+        }).then((result) => {
+            console.log("I'm then after catch")
+        })
+
+
+o/p : 
+
+Im catch 1st : Dad has not gifted the mobile.
+Im finally befor then again
+I'm then after catch
+=================================
+
+const res = new Promise((resolve, reject) => {
+            const passexam = false;
+                if (passexam) {
+                    resolve("Dad gifted the new mobile.");
+                } else {
+                    reject("Dad has not gifted the mobile.");
+                }
+        });
+
+res.finally((result) => {
+            console.log("I'm 1st finally")
+        }).catch((result) => {
+            console.log("Im catch 1st : ", result)
+	}).finally((result) => {
+            console.log("Im finally again")
+        }).then((result) => {
+            console.log("I'm then after finally")
+        })
+
+I'm 1st finally
+Im catch 1st : Dad has not gifted the mobile.
+Im finally again
+I'm then after finally
+===================
+
+here resolve will execute : passexam = true;
+
+const res = new Promise((resolve, reject) => {
+            const passexam = true
+                if (passexam) {
+                    resolve("Dad gifted the new mobile.");
+                } else {
+                    reject("Dad has not gifted the mobile.");
+                }
+        });
+
+res.then((result) => {
+            console.log("I'm 1st then")
+        }).catch((result) => {
+            console.log("Im catch")
+        }).then((result) => {
+            console.log("I'm then after catch")
+        })
+
+o/p : 
+I'm 1st then
+I'm then after catch
+
+==========================================
+
+finally() will execute at any place and number of times (2 times if called twice etc),
+if we call finally at fisrt place then it will execute it and then as per resolve or reject it will call then or catch.
+
+========================================
+
+Promise.all()
+
+	

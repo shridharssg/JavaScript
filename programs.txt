@@ -1,0 +1,87 @@
+
+const obj = { a: 'one', b: 'two', a: 'three' };
+console.log(obj);
+
+ans : { a: "three", b: "two" }
+
+If you have two keys with the same name, the key will be replaced. It will still be in its first position, but with the last specified value.
+
+=========================================
+
+==============
+Q. 
+function sum(a, b) {
+  return a + b;
+}
+
+sum(1, '2');
+
+o/p : '12'
+
+reason : 
+
+JavaScript is a dynamically typed language: we don't specify what types certain variables are. Values can automatically be converted into another type without you knowing, which is called implicit type coercion. Coercion is converting from one type into another.
+
+In this example, JavaScript converts the number 1 into a string, so 1 concatenate with 2 => '12'
+
+========
+
+. What are the three phases of event propagation?
+
+Capturing > Target > Bubbling
+
+During the capturing phase, the event goes through the ancestor elements down to the target element. It then reaches the target element, and bubbling begins.
+
+
+|	<form>		up arrow
+|	<div>		|
+|	<p> target 	|
+down
+
+
+==============
+
+
+<div onclick="console.log('div')">
+  <p onclick="console.log('p')">
+    Click here!
+  </p>
+</div>
+
+o/p : p div
+
+explanation : 
+If we click p, we see two logs: p and div. During event propagation, there are 3 phases: capturing, target, and bubbling. By default, event handlers are executed in the bubbling phase (unless you set useCapture to true). It goes from the deepest nested element outwards.
+
+
+======
+
+function getAge(...args) {
+  console.log(typeof args);
+}
+
+getAge(21);
+
+ans : object
+
+The rest parameter (...args) lets us "collect" all remaining arguments into an array. An array is an object, so typeof args returns "object"
+
+===============================================
+
+const person = { name: 'Lydia' };
+
+function sayHi(age) {
+  return `${this.name} is ${age}`;
+}
+
+console.log(sayHi.call(person, 21));
+console.log(sayHi.bind(person, 21));
+
+o/p: Lydia is 21 function
+
+With both, we can pass the object to which we want the this keyword to refer to. However, .call is also executed immediately!
+
+.bind. returns a copy of the function, but with a bound context! It is not executed immediately.
+
+====================================
+
