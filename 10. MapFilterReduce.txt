@@ -107,7 +107,7 @@ filter
 
 =============================================================================
 
-reduce
+reduce : return single value at the end
 	* The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
 	* reduce() also runs the callback for each element of array and return single value at the end
 	* Does not change the original array
@@ -133,7 +133,7 @@ reduce
 		
 				const result = score.reduce(function(accumator, val){
 					return accumator + val;
-				}, 0)
+				}, 0) 		//need to pass initial value for accumator
 
 				or
 				
