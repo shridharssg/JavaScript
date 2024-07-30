@@ -29,7 +29,7 @@ To overcome this, arguments property and rest paramter used.
 
 1. Arguments property
 
-before spread operator, in ES5, arguments property used to resolve above issue (handle Indefinte number of parametes)
+before rest operator, in ES5, arguments property used to resolve above issue (handle Indefinte number of parametes)
 
 function sum(){
 	console.log(arguments) //it will returns the array kind of syntax which is not complete array. so we can not perform direct operation on that. first we need to convert it in array
@@ -60,7 +60,7 @@ sum(2,3,5,8)	// [2,3,5,8]
 
 ----------
 
-Differenc ebetween arguments property vs rest operator
+Differenc between arguments property vs rest operator
 
 1.
 console.log(arguments) //it will returns the array kind of syntax which is not complete array. so we can not perform direct operation on that. first we need to convert it in array
@@ -73,10 +73,26 @@ console.log(values) // ...values it will returns the direct array with all argum
 
 	rest : its allowed to pass number of varibles as a paramter. but rest operator should be last parameter.
 		ex. 	like calculation(sum, 1,2)
+
+
+	function sum(a,b){
+	    console.log(a) //1
+	    console.log(arguments) //[Arguments] { '0': 1, '1': 2, '2': 6, '3': 7 }   consider all parameters as a arguments
+	}
+	
+	function sumRest(a,b,...val){
+	    console.log(a) //1
+	    console.log(val) //[6,7] //not consider all parameter
+	}
+	
+	
+	sum(1,2,6,7)   
+		
+	sumRest(1,2,6,7)
 -----------------
 
 	
-Differenc ebetween spread operator vs rest operator
+Differenc between spread operator vs rest operator
 
 syntax 
 
