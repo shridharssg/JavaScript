@@ -5,10 +5,7 @@ Variables declared with "var" are function scoped
 "let" and "const" are block scoped
 
 
-Scope : 
-	It decides the accessibility of data whether it can use here or 
-	not and curly braces create a block.
-
+Scope : It decides the accessibility of data whether it can use here or not and curly braces create a block.
 
 {
 	define a block
@@ -17,14 +14,16 @@ Scope :
 ---
 
 Before ES6
-Only functions can create a scope. 
-everything inside function is private and outside the function is global or public
+	Only functions can create a scope. 
+	everything inside function is private and outside the function is global or public
 
-Global means available for whole window
+	Global means available for whole window
 
 Inside function : private
 Outside function : global/ public
 
+After ES6
+	with let and const keyword, block can create a scope. block means for, if etc
 
 Difference and drawbacks of var 
 
@@ -85,8 +84,7 @@ so it will override the value of firstName and output of both is "Inside functio
 
 Note : with var keyword, we can redeclared the varible. here we declared var firstName in outside as we as inside if block
 
-3. 
-Why let keyword ?
+3. Why let keyword ?
 in above example, console.log("Outside function ", firstName) is expect name is John. but due to declare inside if block, it is override.
 to overcome this, we can use the let keyword.
 
