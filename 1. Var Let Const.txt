@@ -158,13 +158,34 @@ Const :
 let firstName = 'John'
  firstName = 'peter'  // re initialize allowed
 
+ex1 : error 1 : 
 
 const maxUpload = 100
  maxupload = 200  // re initialize not allowed error : Assignvment to constant variable
+---
 
-check re initialize for const in diff scope
+ex2 : error : TypeError: Assignment to constant variable.
 
-other differece between var and let is same for const.
+const firstName = 'John'
+if(1==1){
+	firstName = 'Peter'
+}
+
+---
+ex.3 Working in diff scope
+
+if(1==1){
+	const firstName = 'Peter'
+	console.log("Inside function ", firstName)
+}
+
+console.log("Outside function ", firstName)
+
+o/p : 
+Inside function  Peter
+Outside function  John
+
+IMP : other differece between var and let is same for const.
 ==============================================================
 
 
