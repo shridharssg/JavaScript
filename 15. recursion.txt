@@ -4,17 +4,15 @@ A recursive function is the function that corresponds to this.
 The base case (or halting condition) and the recursive call to itself are commonly two elements of a recursive function. 
 
 
-The base case/terminate condition is when the function should no longer recurse.' 
+The base case/terminate condition is when the function should no longer recurse.
 
 If we dont mentioned terminate condition, then it goes infinite loop and it will throws "maximize call stack size exceeded"
 
 
 
 function test(){
-
 	test()
 }
-
 
 test()
 
@@ -23,7 +21,7 @@ test()
 when to use recursion
 when we need to work on nested structure and we have no idea about how nested it. 
 
-like manager has team, inside that lead, each lead has team, agian continue.
+like manager has team, inside that lead, each lead has team, again continue.
 
 
 
@@ -43,7 +41,6 @@ let emp = {
 		
 	}
 
-
 so here, shridhar has team
 	harsha has no team
 	kavi has teams which is sachin, and sachin also teams name is viru..
@@ -52,10 +49,7 @@ so here, shridhar has team
 
 to print name all employess, we used recursion here.
 
-
-
 ---------
-
 
 function getTeam(data){
 	
