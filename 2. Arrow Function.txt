@@ -32,7 +32,17 @@ Note :
 
 5. arrow function with returning object, need to use () parenthesis
 
+	const getUser = () => {
+		return ({ 'name': 'shridhar', 'place': 'Mumbai' })	//add () parenthesis for object
+	}
+	console.log(getUser())
+
+	or 
+	
 	const getUser = () => ({ 'name': 'shridhar', 'place': 'Mumbai' })
+	console.log(getUser())
+	
+
 
 6. arrow function doesnt have its own this. so when we called this inside arrow function, it is always refer to its parent scope 
 
