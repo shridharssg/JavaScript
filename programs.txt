@@ -12,6 +12,7 @@ sum(2,3)
 sum(2,3,8)
 sum(2,3,10)
 
+console.log(typeof arguments)  => object
 ====================
 const obj = { a: 'one', b: 'two', a: 'three' };
 console.log(obj);
