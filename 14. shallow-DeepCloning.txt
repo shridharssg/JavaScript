@@ -88,7 +88,7 @@ B. Non Primitive Types (shallow copy example)
 	console.log( copiedObj  )   -> o/p : { name : 'karan', age : 20 }
 
 So here we change the name property of copiedObj object. But will also affect on originalObj.
-This is one example of sahllow copy.
+This is one example of Shallow copy.
 
 
 -----------
@@ -209,7 +209,7 @@ So, here, name is not reflected in originalObj, but city modified for both objec
 			}
 	}
 
-	let copiedObj = (...originalObj)
+	let copiedObj = {...originalObj}
 
 	copiedObj.name = 'karan'
 	copiedObj.address.city = 'Pune'
@@ -223,7 +223,7 @@ So, here, name is not reflected in originalObj, but city modified for both objec
 Achive full deep copy by using Spread Operator
 	
 	
-	let copiedObj = (...originalObj)
+	let copiedObj = {...originalObj}
 	
 	copiedObj = {
 		...copiedObj,
