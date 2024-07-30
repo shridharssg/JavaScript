@@ -116,7 +116,7 @@ for(var i=0; i<=5; i++){
 console.log("Outside for ", i)
 
 
-o/p : 1 2 3 4 5 Outside for 6
+o/p : 0 1 2 3 4 5 Outside for 6
 
 
 
@@ -129,7 +129,7 @@ for(let i=0; i<=5; i++){
 console.log("Outside for ", i) //global scope for i
 
 
-o/p : 1 2 3 4 5 Outside for 100
+o/p : 0 1 2 3 4 5 Outside for 100
 
 4.
 declaration in same scope
@@ -162,6 +162,7 @@ let firstName = 'John'
 const maxUpload = 100
  maxupload = 200  // re initialize not allowed error : Assignvment to constant variable
 
+check re initialize for const in diff scope
 
 other differece between var and let is same for const.
 ==============================================================
