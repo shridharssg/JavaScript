@@ -13,7 +13,10 @@ sum(2,3,8)
 sum(2,3,10)
 
 console.log(typeof arguments)  => object
+
 ====================
+
+
 const obj = { a: 'one', b: 'two', a: 'three' };
 console.log(obj);
 
@@ -23,7 +26,6 @@ If you have two keys with the same name, the key will be replaced. It will still
 
 =========================================
 
-==============
 Q. 
 function sum(a, b) {
   return a + b;
@@ -39,7 +41,17 @@ JavaScript is a dynamically typed language: we don't specify what types certain 
 
 In this example, JavaScript converts the number 1 into a string, so 1 concatenate with 2 => '12'
 
-========
+but
+
+function sum(a, b) {
+  return a - b;
+}
+
+console.log(sum(5, '2')) o/p : 3
+
+for add -> it concatenate
+other oeration -> perform actual operation for -, *, /
+========================
 
 . What are the three phases of event propagation?
 
@@ -96,7 +108,7 @@ o/p: Lydia is 21 function
 
 With both, we can pass the object to which we want the this keyword to refer to. However, .call is also executed immediately!
 
-.bind. returns a copy of the function, but with a bound context! It is not executed immediately.
+.bind. > returns a copy of the function,  with a bind context! It is not executed immediately.
 
 ====================================
 
