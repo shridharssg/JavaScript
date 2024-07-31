@@ -143,3 +143,31 @@ With both, we can pass the object to which we want the this keyword to refer to.
 
 ====================================
 
+
+function chaining
+
+function main(num) {
+  let i = num;
+  return {
+    add: function (num) {
+      i += num;
+      return this;
+    },
+    subtract: function (num) {
+      i -= num;
+      return this;
+    },
+    multiple: function (num) {
+      i *= num;
+      return this;
+    },
+    print() {
+      return i;
+    },
+  };
+}
+
+const x1 = main(10);
+const value = x1.add(6).subtract(4).multiple(3).print();
+console.log(value)
+
