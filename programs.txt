@@ -1,4 +1,35 @@
+
+for (var i = 0; i < 5; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, i * 1000);
+} 
+
+
+o/p  : 5 5 5 5 5
+
+how to print 0 1 2 3 4
+
+https://medium.com/@axionoso/watch-out-when-using-settimeout-in-for-loop-js-75a047e27a5f
+
+Solution
+1. Factor out the setTimeout function and invoke it immediately in the for loop.
+
+	for(var i = 0; i < 5; i++) {
+	  delay(i)
+	}
+	function delay(i) {
+	  setTimeout(() => {
+	    console.log(i)
+	  }, i*1000);
+	}
+	
+
+option 2. Declare the variable i in the for loop with let instead of var. The let keyword from ES6 creates a separate scope for the code block that allows for loop to print the consecutive variables.
+	
+==============================
 addition of infinite number of parameter send to function - argument binding
+
 function sum(){
 	//console.log(arguments[0]);
 	let sum = 0
