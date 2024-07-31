@@ -4,10 +4,10 @@ Call Apply Bind
 first understand the situation,
 
 const Employee = {
-	        firstName : 'sam';
-    		lastName : 'karan';
+	        firstName : 'sam',
+    		lastName : 'karan',
 		getFullName : function(){
-			console.log(`fullName is ${this.firstName} ${this.lastName} `
+			console.log(`fullName is ${this.firstName} ${this.lastName} `)
 		}
 	}
 
@@ -43,18 +43,18 @@ These 3 methods used to set this keyword independant of how to function called.
 ex. 2
 
 const employee = {
-	        firstName : 'sam';
-    		lastName : 'karan';
+	        firstName : 'sam',
+    		lastName : 'karan',
 		getFullName : function(){
-			console.log(`fullName is ${this.firstName} ${this.lastName} `
+			console.log(`fullName is ${this.firstName} ${this.lastName} `)
 		}
 	}
 
 const customer = {
-	        firstName : 'joss';
-    		lastName : 'buttler';
+	        firstName : 'joss',
+    		lastName : 'buttler',
 		getFullName : function(){
-			console.log(`fullName is ${this.firstName} ${this.lastName} `
+			console.log(`fullName is ${this.firstName} ${this.lastName} `)
 		}
 	}
 
@@ -67,8 +67,8 @@ Function Borrowing :
 	To achieve this function borrowing, we have 3 methods : Call Apply Bind
 
 const customer = {
-	        firstName : 'joss';
-    		lastName : 'buttler';		
+	        firstName : 'joss',
+    		lastName : 'buttler'	
 	}
 
 customer object without getFullName method.
@@ -113,10 +113,10 @@ Apply : pass argument as array
 eg. 
 
 const employee = {
-	        firstName : 'sam';
-    		lastName : 'karan';
+	        firstName : 'sam',
+    		lastName : 'karan',
 		getFullName : function(city){
-			console.log(`fullName is ${this.firstName} ${this.lastName} staying in ${city} `
+			console.log(`fullName is ${this.firstName} ${this.lastName} staying in ${city} `)
 		}
 	}
 
@@ -134,13 +134,13 @@ const getFullName = function(){
 		}
 
 const employee = {
-	        firstName : 'sam';
-    		lastName : 'karan';
+	        firstName : 'sam',
+    		lastName : 'karan'
 	}
 
 const customer = {
-	        firstName : 'joss';
-    		lastName : 'buttler';
+	        firstName : 'joss',
+    		lastName : 'buttler'
 	}
 
 getFullName.call(employee, 'Pune')   o/p : sam karan staying in Pune
