@@ -1,4 +1,22 @@
-
+https://dotnettutorials.net/lesson/javascript-promise/
 
 types:
 https://dev.to/swarnaliroy94/methods-of-promise-all-any-finally-o2e
+
+
+JavaScript Promises
+In JavaScript, a Promise is used for performing asynchronous operations. It represents a result that may be available now, or in the future or never. Promises are easy to manage when dealing with multiple asynchronous operations. which is used to resolve callback hell issue.
+
+Note: A promise starts in the pending state and ends in either a fulfilled state or a rejected state.
+
+Where to use Promises
+When we are using API and want to make an asynchronous call to remote web services and requesting some data from web service then the JavaScript promise promises us to get data from web services and we can use it in the future. It is used for handling asynchronous events and It’s mostly used for handling the asynchronous HTTP requests
+
+Promises features
+It’s good for handling asynchronous operation
+Good for handling multiple asynchronous operations
+Provide better error handling
+It improves the code readability
+
+JavaScript Promise.race() vs. Promise.all()
+The Promise.all() returns a promise that resolves to an array of values from the input promises while the Promise.race() returns a promise that resolves to the value from the first settled promise.
