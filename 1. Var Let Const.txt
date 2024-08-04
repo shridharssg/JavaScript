@@ -1,3 +1,20 @@
+JavaScript ES6 
+
+let and const keyword
+JavaScript Arrow Function
+JavaScript Default Parameters
+JavaScript Template Literals
+JavaScript Spread Operator
+JavaScript Map
+JavaScript Set
+Destructuring Assignment
+JavaScript Classes
+JavaScript Inheritance
+JavaScript for...of
+JavaScript Proxies
+
+
+============================
 ES5 : Var
 ES6 : let and const
 
