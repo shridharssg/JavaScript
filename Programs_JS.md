@@ -195,20 +195,47 @@ function reverseString(str) {
 ```
 ---
 
-#### Program : get unique numbers from array
+#### Program : Remove duplicates or get unique numbers from an array. 
 ```
-function getUniqueElements(arr) { 
+function removeDuplicates(arr) { 
     let abc =  new Set(arr); 
     return abc; //Set(4) { 1, 2, 3, 12 }
   //return Array.from(new Set(arr)) // [ 1, 2, 3, 12 ]
+}
+
+or
+
+function removeDuplicates(arr) { 
+
+  return arr.filter(function(item, index) {
+            return (arr.indexOf(item) === index)
+        }
+      ); 
 } 
+
+let res = removeDuplicates([1,1,4,2,4,1])
+console.log(res) // [1,4,2]
 
 console.log(getUniqueElements([1,2,3,1,12]))
 ```
 ---
 
-#### Program : 
+#### Program : write a function to count the occurrences of each character in the string. 
+
 ```
+function countCharacterOccurrences(str) { 
+
+  const charCount = {}; 
+
+  for (let char of str) { 
+    charCount[char] = (charCount[char] || 0) + 1; 
+  }
+  
+  return charCount; 
+} 
+
+let res = countCharacterOccurrences('shridhar')
+console.log(res)
 
 ```
 ---
