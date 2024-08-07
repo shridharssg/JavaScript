@@ -27,3 +27,27 @@ if (number < 1) {              // check if number is less than 1
         console.log(`${number} is a not prime number`);
     }
 }
+
+
+=================
+
+2. Fibonacci Series
+
+function fibo(num){
+    console.log('Fibonacci Series:');
+    let n1=0, n2=1, nextTerm=0
+    for(let i=1; i<=num; i++){
+        console.log(n1) //print n1
+        nextTerm=n1+n2;
+        n1=n2;
+        n2=nextTerm;
+    }
+}
+
+fibo(5)
+
+0 1 1 2 3
+
+The for loop iterates up to the number entered by the user.
+
+0 is printed at first. Then, in each iteration, the value of the second term is stored in variable n1 and the sum of two previous terms is stored in variable n2.
