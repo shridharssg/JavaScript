@@ -51,3 +51,25 @@ fibo(5)
 The for loop iterates up to the number entered by the user.
 
 0 is printed at first. Then, in each iteration, the value of the second term is stored in variable n1 and the sum of two previous terms is stored in variable n2.
+
+===============================================
+fibo using recursion
+
+// program to display fibonacci sequence using recursion
+function fibonacci(num) {
+    if(num < 2) {
+        return num;
+    }
+    else {
+        return fibonacci(num-1) + fibonacci(num - 2);
+    }
+}
+
+function fibo(num){
+    for(let i = 0; i < num; i++) {
+        fibonacci(i)
+    }
+}
+
+fibo(6)
+===============================================
