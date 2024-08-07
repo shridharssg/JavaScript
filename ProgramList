@@ -73,3 +73,21 @@ function fibo(num){
 
 fibo(6)
 ===============================================
+
+const inp = [
+ 
+  { user: 'UserA', city: 'Bangalore' },
+ 
+  { user: 'UserB', city: 'Delhi' },
+ 
+  { user: 'UserC', city: 'Bangalore' }
+ 
+];
+required op
+const output = [
+ 
+  { city: 'Bangalore', users: ['UserA', 'userC'] },
+ 
+  { city: 'Delhi', users: ['UserB'] }
+ 
+]
