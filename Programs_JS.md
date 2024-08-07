@@ -113,29 +113,198 @@ const output = [
 ```
 ---
 
-#### 
+#### argument binding addition of infinite number of parameter
 
+```
+addition of infinite number of parameter send to function - argument binding
+
+function sum(){
+	//console.log(arguments[0]);
+	let sum = 0
+	for(let i=0; i<arguments.length; i++){
+	    sum+=arguments[i]
+	}
+	console.log(sum)
+}
+
+sum(2,3)
+sum(2,3,8)
+sum(2,3,10)
+
+```
+---
+
+#### function chaining
+
+```
+function main(num) {
+  let i = num;
+  return {
+    add: function (num) {
+      i += num;
+      return this;
+    },
+    subtract: function (num) {
+      i -= num;
+      return this;
+    },
+    multiple: function (num) {
+      i *= num;
+      return this;
+    },
+    print() {
+      return i;
+    },
+  };
+}
+
+const x1 = main(10);
+const value = x1.add(6).subtract(4).multiple(3).print();
+console.log(value)
+
+```
+---
+
+#### Program : factorial
+
+```
+function factorial(number) { 
+  if (number === 0 || number === 1) { 
+    return 1; 
+  } else { 
+    return number * factorial(number-1); 
+  } 
+} 
+
+let res = factorial(4)
+console.log(res) //4*3*2
+```
+---
+
+#### Reverse string without inbuilt methods
+
+```
+function reverseString(str) { 
+  let reversed = ”; 
+  for (let i = str.length – 1; i >= 0; i–) { 
+    reversed += str[i]; 
+  } 
+  return reversed; 
+}
+
+```
+---
+
+#### Program : get unique numbers from array
+```
+function getUniqueElements(arr) { 
+    let abc =  new Set(arr); 
+    return abc; //Set(4) { 1, 2, 3, 12 }
+  //return Array.from(new Set(arr)) // [ 1, 2, 3, 12 ]
+} 
+
+console.log(getUniqueElements([1,2,3,1,12]))
+```
+---
+
+#### Program : 
 ```
 
 ```
 ---
 
-#### 
 
+#### Program : 
 ```
 
 ```
 ---
 
-#### 
-
+#### Program : 
 ```
 
 ```
 ---
 
-#### 
 
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
+```
+
+```
+---
+
+
+#### Program : 
 ```
 
 ```
