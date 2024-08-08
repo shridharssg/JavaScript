@@ -110,6 +110,23 @@ const output = [
  
 ]
 
+**program**
+
+let result = [];
+ 
+inp.forEach( ({ user, city }) => {
+      let cityObj = result.find(obj => obj.city === city);
+    
+      if (cityObj) {
+        cityObj.users.push(user);
+      } else {
+        result.push({ city: city, users: [user] });
+      }
+      
+});
+ 
+console.log(result);
+
 ```
 ---
 
