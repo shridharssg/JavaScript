@@ -1,3 +1,64 @@
+Loops
+Loops are useful for executing a block of code for a specified number of times based on some specified conditions. There are different types of loops in JavaScript:
+
+for loops
+for ... in loops
+for ... of loops
+while loops
+do ... while loops  
+
+----
+How to use for loops
+for loops are used to execute a block of code a number of times:
+
+for (let i = 0; i < 5; i++) {
+    return i;
+}
+
+----
+
+How to use for ... in loops
+for ... in loops are used to loop through the properties of an object:
+
+for (let prop in obj) {
+    return obj.prop;
+}
+
+---
+
+How to use for ... of loops
+for ... of loops are used to loop through the values of iterable objects like arrays, strings, maps, and so on:
+
+let numArr = [2, 4, 6, 8]
+for (let val of numArr) {
+    return val ** 2
+}
+
+---
+
+How to use while loops
+while loops are used to execute a block of code while a certain condition still holds true:
+
+while (i < 20) {
+    return i;
+    i++;
+}
+
+---
+
+How to use do ... while loops
+do ... while loops execute a block of code first without any conditions. For as long as a certain condition still holds true it continues to execute the block of code:
+
+let i = 3;
+do {
+    return i;
+    i++;
+} 
+while (i < 4)
+
+
+
+============
 do...while loop is similar to the while loop. 
 
 The only difference is that 
@@ -132,7 +193,17 @@ array.forEach(function (element) {
   console.log(element);
 
 });
+=================
 
+
+Loops
+Loops are useful for executing a block of code for a specified number of times based on some specified conditions. There are different types of loops in JavaScript:
+
+for loops
+for ... in loops
+for ... of loops
+while loops
+do ... while loops  
 
 ====
 
