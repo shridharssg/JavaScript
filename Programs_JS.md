@@ -1,3 +1,24 @@
+
+event loop phases example
+
+https://javascriptcentric.medium.com/javascript-interview-preparation-priority-of-callback-promise-settimeout-and-process-nexttick-93be400470a8
+
+---
+
+#### Reverse a string without any built-in method:
+```
+function reverseString(str) {
+    let reverseString = "";
+    for (let i = str.length - 1; i >= 0; i -- ) {
+        reverseString += str[i];
+    }
+    return reverseString;
+}
+const result = reverseString("hello world");
+console.log(result); // dlrow olleh
+```
+---
+
 #### Program : Given string is a palindrome (reads the same forwards and backwards)
 
 ```
