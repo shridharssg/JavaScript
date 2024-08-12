@@ -1,5 +1,7 @@
 Closures : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 
+examples : https://blog.bitsrc.io/collection-of-closure-problems-in-javascript-fcd38ac1c765
+
 a closure gives you access to an outer function's scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
 
 function init() {
