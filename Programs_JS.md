@@ -25,6 +25,8 @@ console.log(result); // dlrow olleh
 #### Program : Given string is a palindrome (reads the same forwards and backwards)
 
 ```
+use above logic to check without inbuild method.
+
 function isPalindrome(str) { 
 
   return str === str.split(”).reverse().join(”); 
