@@ -283,10 +283,18 @@ console.log(res)
 ```
 ---
 
-
 #### Program : 
 ```
 
+var res = [];
+
+for(var i=0; i<5; i++){
+	res[i]=function(){
+		return i;
+	}
+}
+
+console.log(res)
 ```
 ---
 
