@@ -277,8 +277,10 @@ function countCharacterOccurrences(str) {
   return charCount; 
 } 
 
-let res = countCharacterOccurrences('shridhar')
+let res = countCharacterOccurrences('hii')
 console.log(res)
+
+o/p : { h: 1, i: 2 }
 
 ```
 ---
