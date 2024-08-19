@@ -1,3 +1,10 @@
+https://www.educative.io/courses/step-up-your-js-a-comprehensive-guide-to-intermediate-javascript/7nA1nGn3V6A
+
+imp
+https://rahulvijayvergiya.hashnode.dev/scope-vs-context-in-javascript-clearing-up-the-confusion
+
+---
+
 Rules
 Rule 1 - If the new keyword is used when calling the function, this inside the function is a brand new object created by the JavaScript engine.
 
