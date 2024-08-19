@@ -8,6 +8,22 @@ https://javascriptcentric.medium.com/javascript-interview-preparation-priority-o
 
 ---
 
+sort array : [5,200,6]
+
+const arr = [5,200,6]
+arr.sort((a,b)=>a-b);			// for desc : b-a
+console.log(arr)
+
+sort method sort the array and modify the original arry. if you want the preserve original array,you can use slice() to create copy of arrya before sorting it.
+
+const arr = [5,200,6]
+const sortedArr = arr.slice().sort((a,b)=>a-b);
+console.log(sortedArr)
+
+
+
+---
+
 #### Reverse a string without any built-in method:
 ```
 function reverseString(str) {
