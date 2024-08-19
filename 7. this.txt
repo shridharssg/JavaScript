@@ -1,5 +1,8 @@
 https://www.educative.io/courses/step-up-your-js-a-comprehensive-guide-to-intermediate-javascript/7nA1nGn3V6A
 
+imp
+https://rahulvijayvergiya.hashnode.dev/scope-vs-context-in-javascript-clearing-up-the-confusion
+
 this is not variable. it is keyword
 this keyword always holds the reference to a single object which is depends on where we are referring.
 
