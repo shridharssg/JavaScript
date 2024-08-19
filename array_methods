@@ -1,0 +1,43 @@
+
+`slice()` and `splice()` 
+
+`slice()` and `splice()` are two array methods in JavaScript that are often confused with each other due to their similar names. However, they serve different purposes:
+ 
+`slice()`
+ 
+- Returns a shallow copy of a portion of an array
+- Does not modify the original array
+- Takes two optional arguments: `start` and `end` indices
+- Returns a new array with elements from `start` to `end-1`
+ 
+Example:
+```
+const arr = [1, 2, 3, 4, 5];
+const slicedArr = arr.slice(1, 3); // [2, 3]
+console.log(arr); // [1, 2, 3, 4, 5] (original array remains unchanged)
+```
+ 
+`splice()`
+ 
+- Modifies the original array by removing or replacing elements
+- Returns an array of removed elements (if any)
+- Takes three optional arguments: `start`, `deleteCount`, and `items` to insert
+- Removes `deleteCount` elements starting from `start` index and inserts `items` at that position
+ 
+Example:
+```
+const arr = [1, 2, 3, 4, 5];
+arr.splice(1, 2, 'a', 'b'); // [1, 'a', 'b', 4, 5]
+console.log(arr); // [1, 'a', 'b', 4, 5] (original array is modified)
+```
+ 
+In summary:
+ 
+- `slice()` creates a new array copy without modifying the original array.
+- `splice()` modifies the original array by removing or replacing elements.
+ 
+When to use each:
+ 
+- Use `slice()` when you need a copy of a portion of an array without modifying the original array.
+- Use `splice()` when you need to modify the original array by removing or replacing elements.
+ 
