@@ -389,7 +389,7 @@ To invoke script mode you will add the "use strict"; syntax to the top of the co
 
 "use strict";
 
-let name = "Musab";
+let name = "Shridhar";
 
 console.log(name);
 Also, you can apply strict mode to a function like this:
