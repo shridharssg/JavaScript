@@ -58,6 +58,80 @@ https://medium.com/sessionstack-blog/how-javascript-works-memory-management-how-
 
 https://javascriptcentric.medium.com/top-50-nodejs-interview-questions-and-answers-for-2024-5e460dac7852
 
+---
+### What is the Factory function and generator function?
+A factory function in JavaScript is a function that returns an object. It is a pattern used to create objects in a straightforward and organized manner. Instead of using constructor functions and the new keyword to create new objects, a factory function encapsulates the object creation process and returns a new object.
+
+```
+function createPerson(name, age) {
+  return {
+    name: name,
+    age: age,
+    greet: function() {
+      return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+    }
+  };
+}
+
+const person1 = createPerson('Alice', 25);
+const person2 = createPerson('Bob', 30);
+
+console.log(person1.greet()); // Output: Hello, my name is Alice and I am 25 years old.
+console.log(person2.greet()); // Output: Hello, my name is Bob and I am 30 years old.
+```
+
+### Generator function
+
+A Generator function in JavaScript is a special type of function that can be paused and resumed during its execution.
+
+A generator function produces a sequence of results instead of a single value.
+
+When a generator function called it returns a generator object that can be used to control the execution of the function by calling the next() method.
+
+The function's code can be paused within the body using the yield keyword, and it can later be resumed from the exact point where it was paused.
+
+```
+function* numberGenerator() {
+  let i = 0;
+  while (true) {
+    yield i++;
+  }
+}
+
+const gen = numberGenerator();
+console.log(gen.next().value); // Output: 0
+console.log(gen.next().value); // Output: 1
+console.log(gen.next().value); // Output: 2
+```
+This provides a powerful mechanism for creating iterators and handling asynchronous code.
+
+---
+
+### How to make an object immutable? (seal and freeze methods)?
+In JavaScript, you can make an object immutable using the Object.seal() and Object.freeze() methods.
+
+Object.freeze(): (Completely Immutable) this method freezes an object, making it both sealed and marking all its properties as read-only. After freezing an object, its properties cannot be modified, added, or removed.
+
+```
+     const obj = { name: 'Alice', age: 25 };
+     Object.freeze(obj);
+     obj.name = 'Bob'; // Not allowed
+     obj.address = '123 Street'; // Not allowed
+     delete obj.age; // Not allowed
+```
+     
+Object.seal(): (Partialy Immutable) this method seals an object, preventing new properties from being added and marking all existing properties as non-configurable. However, you can still modify the values of existing properties that are writable.
+
+```
+     const obj = { name: 'Alice', age: 25 };
+     Object.seal(obj);
+     obj.name = 'Bob'; // Allowed
+     obj.address = '123 Street'; // Not allowed (no new properties can be added)
+     delete obj.age; // Not allowed (existing properties cannot be deleted)
+```
+
+---
+
 ### Find vs Filter
 
 const x = [1, 2, 3, 4, 5];
@@ -75,191 +149,6 @@ In filter(), whole array is iterated despite the fact that the element being sea
 But in find(), as soon as the element that satisfies the condition is found, it gets returned.
 
 ---
-
-### Difference between pipe and chaining in a node?
-
-Pipe: In Node.js, the “pipe” method is used to direct the output of one stream to the input of another stream. It is commonly used with readable and writable streams to efficiently transfer data from one source to another without explicitly having to manage the data flow.
-
-```
-const fs = require('fs');
-
-const readableStream = fs.createReadStream('input.txt');
-const writableStream = fs.createWriteStream('output.txt');
-
-readableStream.pipe(writableStream);
-```
-
-Chaining in Node.js generally refers to method chaining, which is the practice of calling multiple methods on an object in a single statement, with each method returning the object itself, thereby allowing for a sequence of operations to be performed on the object in a linear fashion.
-```
-const result = [1, 2, 3, 4, 5]
-  .map(num => num * 2)
-  .filter(num => num > 5)
-  .reduce((acc, num) => acc + num, 0);
-
-console.log(result); // Output: 24
-```
-
-Both concepts are fundamental to working with streams and asynchronous operations in Node.js.
-
----
-
-### What is the control flow function?
-
-Control flow functions are used to dictate the order in which specific code blocks or functions are executed. These functions are used to manage the flow of execution within a program, enabling developers to handle asynchronous operations, iterate through collections, handle conditional logic, and more.
-
----
-
-### What is CORS?
-CORS stands for Cross-Origin Resource Sharing. It is a security feature implemented in web browsers to restrict web pages from making requests to a different domain than the one that served the web page.
-
-In a Node.js application, you can set up CORS handling using middleware such as the ‘cors’ package or by manually adding the necessary CORS headers to responses. This allows you to control which origins have permission to access resources in your Node.js application.
-
-CORS is a security feature that regulates cross-origin requests, allowing secure communication between different domains while protecting users’ data from unauthorized access and potential security threats.
-
-When you visit a website, let’s say “example.com”, your web browser allows JavaScript code running on “example.com” to make requests to the same domain. This is part of the security protocol called the same-origin policy, and it’s meant to protect users’ data from malicious attacks.
-
-However, sometimes a web page might need to make requests to a different domain. For example, let’s say “example.com” needs to retrieve some data from “api.otherdomain.com”. This is where CORS comes into play.
-
----
-
-###  Difference between crypto and bcrypt module?
-
-**crypto Module**: The crypto module in Node.js provides cryptographic functionality, including encryption, hashing, and decryption. It offers a wide range of cryptographic algorithms and tools for handling secure data transformations.
-
-```
-   const crypto = require('crypto');
-
-   const password = 'mySecurePassword';
-   const salt = crypto.randomBytes(16).toString('hex'); // Generate a random salt
-   const hash = crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex'); // Generate a hashed password
-
-   console.log('Salt:', salt);
-   console.log('Hashed Password:', hash);
-```
-
-**bcrypt Module**: The bcrypt module is specifically designed for password hashing using the bcrypt algorithm. It provides a convenient way to securely hash passwords, a common requirement for user authentication systems. bcrypt automatically handles the generation of salts, which enhances the security of the hashed passwords.
-
-```
-   const bcrypt = require('bcrypt');
-   const saltRounds = 10;
-   const myPlaintextPassword = 'mySecurePassword';
-
-   bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-     if (!err) {
-       console.log('Hashed Password:', hash);
-     }
-   });
-```
-   ---
-
-### Difference between req.params and req.query?
-
-In the context of a Node.js server using the Express framework, req.params and req.query are used to access different types of parameters passed in the URL.
-
-req.params is an object containing properties mapped to the named route parameters. These parameters are part of the URL path and are matched by the route’s path pattern. They are typically used to capture dynamic values from the URL.
-
-```
-// Route definition
-app.get('/users/:id', (req, res) => {
-    const userId = req.params.id; // Access the "id" parameter from the URL
-    // Use userId to retrieve user data
-});
-```
-
-req.query is an object containing a property for each query string parameter in the route. Query parameters are appended to the URL after a ? and are used to pass additional information or filters for the requested resource.
-
-If you have a route defined as /search, and a client makes a request like /search?city=NewYork&active=true, you can access the query parameters city and active using req.query.city and req.query.active respectively.
-
-```
-  // Route definition
-  app.get('/search', (req, res) => {
-      const city = req.query.city; // Access the "city" query parameter
-      const active = req.query.active; // Access the "active" query parameter
-      // Use city and active for searching
-  });
-```
----
-
-### Difference between dependency and dev-dependency?
-Dependencies are the packages that are required for the application to run in the production environment.
-
-DevDependencies are the packages that are only needed for development and testing purposes. These packages include tools, libraries, and utilities that are used during the development, testing, and build process, but are not required for the application to function in the production environment.
-
----
-
-### What is the error first callback function?
-The “error-first callback” pattern, also known as “Node.js-style callbacks”, is a convention used in Node.js for handling asynchronous operations. In this pattern, callback functions are structured to take an error as the first parameter, allowing the calling code to check for and handle errors in a consistent manner.
-
-```
-function readFileAndHandleError(path, callback) {
-  fs.readFile(path, 'utf8', (err, data) => {
-    if (err) {
-      // Pass the error to the callback as the first parameter
-      callback(err);
-    } else {
-      // Pass the data to the callback as the second parameter
-      callback(null, data);
-    }
-  });
-}
-
-// Example usage of the error-first callback function
-readFileAndHandleError('example.txt', (err, data) => {
-  if (err) {
-    console.error('An error occurred:', err);
-  } else {
-    console.log('File data:', data);
-  }
-});
-
-```
----
-
-### Difference between Authentication and Authorization?
-
-Authentication is the process of validating the identity of a user or entity, through the credentials, such as usernames, passwords, biometric data, or security tokens.
-
-Authorization is the process of determining the rights and privileges of a user to access the resources. Authorization typically involves specifying what resources or operations a user can interact with based on their role, group membership, or other relevant attributes.
-
----
-
-### What is cron job?
-A cron job is a time-based job scheduler. It allows users to schedule tasks (commands or scripts) to run periodically at fixed times, dates, or intervals.
-
-In Node.js, you can use the node-cron module to schedule jobs to run at specific times.
-
-```
-const cron = require('node-cron');
-
-// Schedule a job to run every minute
-cron.schedule('* * * * *', () => {
-  console.log('Running scheduled job every minute');
-});
-```
-The first argument ‘* * * * *’ represents the cron expression for running the job every minute. The second argument … is a function that will be executed when the scheduled time is reached.
-
-```
-Run a Job Every Hour:
-
-   const cron = require('node-cron');
-
-   // Schedule a job to run every hour
-   cron.schedule('0 * * * *', () => {
-     console.log('Running scheduled job every hour');
-   });
-```
-
-```
-Run a Job Every Day at a Specific Time:
-
-   const cron = require('node-cron');
-
-   // Schedule a job to run at 8:00 AM every day
-   cron.schedule('0 8 * * *', () => {
-     console.log('Running scheduled job at 8:00 AM every day');
-   });
-```
-  ---
 
 ### import vs require
 
@@ -413,22 +302,52 @@ Replace YOUR_SECRET_KEY with a strong secret key, YOUR_MONGODB_URI with your Mon
 
 ---
 
-### What is nodeJS
+### What is a web worker or service worker in javascript?
+Web Workers and Service Workers are two different concepts in JavaScript,
 
-Node.js is an open-source JavaScript runtime environment that allows you to run JavaScript outside the browser.
-Although Node.js is single-threaded, it has an event loop that makes it multi-threaded.
+Web Workers are designed for concurrent JavaScript execution in the background, while Service Workers are used for creating Progressive Web Apps with offline capabilities and advanced features. Both are essential tools for enhancing the performance and functionality of web applications.
 
-Single-threaded programming languages are synchronous, which means they run the task in their programs sequentially. 
-JavaScript is synchronous, but its event loop makes it asynchronous.
+Each serves a distinct purpose in web development:
 
+**Web Workers:**
+Concurrency: Web Workers are a browser feature that allows you to run JavaScript code in the background, separate from the main browser thread. This enables concurrent execution of tasks without blocking the user interface.
 
-The JavaScript runtime engine consists primarily of the:
+Use Cases: Web Workers are commonly used for tasks that are computationally intensive or time-consuming, such as data processing, image manipulation, or complex calculations. By running these tasks in a separate thread, they don't impact the responsiveness of the web page.
 
-Memory heap and
-Call stack
+Communication: Web Workers can communicate with the main thread using a messaging system. They can send and receive messages, allowing for coordination between the main thread and the worker.
 
-The memory heap is where variables declared in the program are allocated memory space, 
-and the call stack is where the runtime engine stores functions in the program for execution.
+Browser Support: Web Workers are supported in most modern browsers.
+
+**Service Workers:**
+
+**Offline Capabilities**: Service Workers are a more advanced feature used for creating Progressive Web Apps (PWAs). They act as proxy servers that run in the background and can intercept and cache network requests. This enables offline capabilities, such as serving cached content when the user is offline.
+
+**Use Cases:** Service Workers are primarily used for implementing features like offline access, push notifications, and background sync. They enable web apps to function even when there's no internet connection.
+
+**Lifecycle**: Service Workers have their own lifecycle with events like install, activate, and fetch. They are typically registered at the beginning of a web app's life.
+
+**Browser Support**: Service Workers are supported in modern browsers and are a key technology for creating reliable and engaging web applications.
 
 ---
 
+### What is Event delegation?
+Event delegation is a JavaScript programming technique that optimizes event handling for multiple elements.
+
+Instead of attaching an event listener to each individual element, event delegation involves attaching a single event listener to a common ancestor element that is higher up in the DOM (Document Object Model) hierarchy.
+
+When an event occurs on one of the descendant elements, it "bubbles up" to the common ancestor, where the event listener is waiting.
+
+Event delegation is a technique for listening to events where you delegate a parent element as the listener for all of the events that happen inside it.
+
+```
+var form = document.querySelector("#registration-form");
+// Listen for changes to fields inside the form
+form.addEventListener(
+  "input",
+  function (event) {
+    // Log the field that was changed
+    console.log(event.target);
+  },
+  false
+);
+```
