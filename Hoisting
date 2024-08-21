@@ -1,3 +1,5 @@
+check ans end of doc
+
 JavaScript Hoisting
 https://www.programiz.com/javascript/hoisting
 
@@ -28,3 +30,39 @@ In JavaScript, the behavior of hoisting varies depending on whether a variable i
 
 Hoisting With 'var'
 When we declare a variable using var, it is hoisted to the top of its current scope. For example,
+
+-----------------
+
+Explain the concept of hoisting in JavaScript.
+Hoisting in JavaScript is the default behavior where variable and function declarations are moved to the top of their containing scope during the compilation phase, before the actual code execution. This means that you can use a variable or call a function before it's declared in your code.
+
+When you declare a variable using var, the declaration is hoisted to the top of its containing function or block and initialized with the default value of "undefined".
+
+
+console.log(x); // Outputs: undefined
+var x = 5;
+Variables declared with let and const are hoisted as well but have a "temporal dead zone" where they cannot be accessed before their declaration.
+
+
+console.log(x); // Throws an error (ReferenceError)
+let x = 5;
+Function declarations are also hoisted to the top of their containing scope. You can call a function before it's declared in your code.
+
+
+sayHello(); // Outputs: "Hello, world!"
+function sayHello() {
+    console.log("Hello, world!");
+}
+Hoisting is not happening with an arrow function, function expression, or variable initialization.
+
+-------------------------------------------------------------------------
+
+15. What is a Temporal dead zone?
+The Temporal Dead Zone (TDZ) is a concept in JavaScript related to variable declarations using let and const.
+
+When you declare a variable with let or const, it is hoisted to the top of its containing scope, However, unlike var, variables declared with let and const remain uninitialized in the TDZ.
+
+Any attempt to access or use the variable before its actual declaration within the scope will result in a ReferenceError. This is to prevent the use of variables before they have been properly defined.
+
+Understanding the Temporal Dead Zone is important because it helps prevent bugs related to variable usage before initialization. It also promotes best practices in JavaScript coding by encouraging proper variable declarations before use.
+
