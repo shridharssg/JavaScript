@@ -1,3 +1,15 @@
+
+There are certain differences between Arrow and Regular function, i.e
+
+Syntax diff
+No arguments (arguments are array-like objects)   (argument binding)
+No prototype object for the Arrow function
+Cannot be invoked with a new keyword (Not a constructor function)
+No own this (call, apply & bind won't work as expected)
+It cannot be used as a Generator function
+Duplicate-named parameters are not allowed
+
+=====================
 Arrow Function (Flat arrow function)
 
 An Arrow Function expression is a compact alternative to a traditional function expression
