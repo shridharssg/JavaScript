@@ -19,7 +19,60 @@ The displayName() function is an inner function that is defined inside init() an
 Note that the displayName() function has no local variables of its own. 
 However, since inner functions have access to the variables of outer functions, displayName() can access the variable name declared in the parent function, init().
 
+---------------
+
+function outerFunction() {
+  let outerVariable = 'I am from the outer function';
+  
+  return innerFunction() {
+    console.log(outerVariable); // Accessing outerVariable from the outer function's scope
+  }
+  
+}
+
+let myFunction = outerFunction();
+myFunction(); // Output: I am from the outer function
+
+Closure is a feature that allows the function to capture the environment (or to retain access to variables from the scope ) where it is defined, even after that scope has closed.
+
+We can say the closure is a combination of a function and lexical environment where that function is defined.
+
+In other words, a closure gives a function access to its own scope, the scope of its outer function, and the global scope, allowing it to "remember" and continue to access variables and parameters from these scopes.
+
+Closure is created every time when a function is created at the time of function creation and when you define a function inside another function.
+
+
+Execution context is an environment where JavaScript code is executed. For each function call a separate execution context is created and pushed into the execution stack. Once function execution completed it is popped off from stack.
+
+Every execution context has a space in memory where its variables and function are stored, and once the function popped off from the execution stack a JavaScript Garbage collector clear all of these things.
+
+In JavaScript, anything is garbage-collected only when there are no references to it.
+
+In the above example, the anonymous execution context still has a reference to the variables to the memory space of its outer environment. Even though the outerFunction() is finished. (It can access the outerVariable variable and use it inside console.log(outerVariable)).
+
+
+---
+Closures have several important use cases in JavaScript:
+
+Data Privacy and Encapsulation:
+  Closures can be used to create private data and encapsulate functionality within a limited scope. By defining functions within another function, the inner functions have access to the outer function's variables, but these variables are inaccessible from outside the outer function. This allows for the creation of private data and methods that are not directly accessible from the outside, thereby enhancing data privacy and encapsulation.
+
+Maintaining State: 
+    Closures are often used to maintain state in asynchronous operations and event handling. For example, when handling asynchronous tasks, closures can capture and retain the state of variables across multiple asynchronous operations, ensuring that the correct variables are accessed when the asynchronous tasks complete.
+
+
+Currying and Partial Application:
+    Closures facilitate functional programming techniques such as currying and partial application. By using closures to capture and remember specific parameters and return a new function that uses these captured parameters, currying and partial application can be achieved. This allows for the creation of specialized functions with pre-set arguments, providing flexibility and reusability.
+
+
+Module Pattern: 
+    Closures are essential in implementing the module pattern in JavaScript. By using closures to create private variables and expose only the necessary public methods, developers can create modular and organized code, preventing unwanted access and modification of internal module data.
+
+
+Callback Functions: 
+    Closures are often employed when working with callback functions. A closure can be used to capture and maintain the state of variables within the context of an asynchronous operation, ensuring that the correct variables are accessible when the callback function is invoked.
+
 lexical scoping
-console.log() statement within the displayName() function successfully displays the value of the name variable, which is declared in its parent function. This is an example of lexical scoping,
+    console.log() statement within the displayName() function successfully displays the value of the name variable, which is declared in its parent function. This is an example of lexical scoping,
 
  A closure is the combination of a function and the lexical environment within which that function was declared
