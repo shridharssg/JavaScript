@@ -58,6 +58,8 @@ https://medium.com/sessionstack-blog/how-javascript-works-memory-management-how-
 
 https://javascriptcentric.medium.com/top-50-nodejs-interview-questions-and-answers-for-2024-5e460dac7852
 
+https://freedium.cfd/https://javascriptcentric.medium.com/top-30-javascript-interview-questions-and-answers-for-2024-7f1e2d1d0638
+
 ---
 ### What is the Factory function and generator function?
 A factory function in JavaScript is a function that returns an object. It is a pattern used to create objects in a straightforward and organized manner. Instead of using constructor functions and the new keyword to create new objects, a factory function encapsulates the object creation process and returns a new object.
