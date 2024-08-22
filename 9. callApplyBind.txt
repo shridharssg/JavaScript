@@ -3,6 +3,7 @@ Call Apply Bind
 
 first understand the situation,
 
+scenario 1
 const Employee = {
 	        firstName : 'sam',
     		lastName : 'karan',
@@ -13,7 +14,19 @@ const Employee = {
 
 	Employee.getFullName();   -> o/p: fullName is sam karan
 		here this will pointing to Emplyoee object.
-	
+
+scenario 1 : arrow function
+const Employee = {
+	        firstName : 'sam',
+    		lastName : 'karan',
+		getFullName : ()=>{
+			console.log(`fullName is ${this.firstName} ${this.lastName} `)
+		}
+	}
+
+	Employee.getFullName();   -> o/p: fullName is undefined undefined
+
+-------------
 
 	Now clone the Employee object getFullName() method
 	
