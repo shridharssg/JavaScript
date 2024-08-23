@@ -318,6 +318,95 @@ console.log(res)
 
 #### Program : 
 ```
+input : uoy-era-woh
+o/p : how are you
+
+function reverseString(){
+   var string ="uoy-era-woh"
+   let result =   string.split('').reverse().join('')
+   return result
+}
+
+let res = reverseString() // how-are-you
+console.log(res.split('-').join(' ')) // how are you
+
+==========
+
+
+
+let person = {    
+    x:15,
+    add: () => { 
+        return person.x   //if this.x then undefined
+    } 
+};
+
+let a = person.add;
+console.log(a()) //15
+
+
+const obj = {
+  a: 10,
+  b: () => {
+    console.log(obj.a); //10
+  }
+};
+ 
+let op = obj.b;
+op(); 
+
+
+let show = {    
+    x:20,
+    add: () => { 
+        return show.x+10
+    } 
+};
+
+let ab =show.add(4)
+console.log(ab) // 30
+
+=======
+
+const obj = {
+  a: 10,
+  b: function() {
+    console.log(this.a); // 10.   //but simply console.log(a) then error
+  }
+};
+
+way 1 
+let op = obj.b.bind(obj);
+op(); 
+
+way 2
+obj.b.call(obj);
+
+=========
+
+function Man (){
+  this.a= 19,
+  this.b= () => {
+    console.log(this.a);
+  }
+};
+let abc = new Man()
+abc.b() // 19
+
+===============================
+
+const arr = [1, 2, 3, 4, 5];
+const sum = arr.reduce((total, num) => total + num);	//it will take default 0 accumulator
+console.log(sum); // 15
+
+
+const initialValue = 5;
+const sumWithInitial = arr.reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue,
+);
+
+console.log(sumWithInitial); // 20
 
 ```
 ---
