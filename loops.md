@@ -1,3 +1,120 @@
+Loops
+Loops are useful for executing a block of code for a specified number of times based on some specified conditions. There are different types of loops in JavaScript:
+
+  for loops
+  for ... in loops
+  for ... of loops
+  while loops
+  do ... while loops  
+
+----
+**How to use for loops**
+
+for loops are used to execute a block of code a number of times:
+
+for (let i = 0; i < 5; i++) {
+    return i;
+}
+
+
+
+The "for" loop used for iterating over arrays, objects, or sequences of values.
+
+It provides more control over the iteration process, allowing you to specify the start and end conditions, as well as the increment or decrement step.
+
+It is typically used when you need to perform a specific action a fixed number of times or when you need fine-grained control over the loop.
+
+It support "break" or "continue" statements for early termination or skipping iterations
+
+**usecase**
+ suppose array has 10000 records, and we want to find specific reocrd. at that time once match, we dont want to proceed more. so in this situation
+for loop should be used bcz we can used break statement to check further. but same thing not possible in forEach so it iterate over 10000 records
+
+
+---
+
+
+How to use for ... in loops
+for ... in loops are used to loop through the properties of an object:
+
+for (let prop in obj) {
+    return obj.prop;
+}
+
+---
+
+How to use for ... of loops
+for ... of loops are used to loop through the values of iterable objects like arrays, strings, maps, and so on:
+
+let numArr = [2, 4, 6, 8]
+for (let val of numArr) {
+    return val ** 2
+}
+
+---
+
+How to use while loops
+while loops are used to execute a block of code while a certain condition still holds true:
+
+while (i < 20) {
+    return i;
+    i++;
+}
+
+---
+
+How to use do ... while loops
+do ... while loops execute a block of code first without any conditions. For as long as a certain condition still holds true it continues to execute the block of code:
+
+let i = 3;
+do {
+    return i;
+    i++;
+} 
+while (i < 4)
+
+
+
+============
+do...while loop is similar to the while loop. 
+
+The only difference is that 
+	in do…while loop, the body of loop is executed at least once.
+
+do {
+    // body of loop
+} while(condition)
+
+
+---
+
+
+while (condition) {
+    // body of loop
+}
+
+eg.
+
+// program to display numbers from 1 to 5
+// initialize the variable
+
+let i = 1, n = 5;
+
+// while loop from i = 1 to 5
+while (i <= n) {
+    console.log(i);
+    i += 1;
+}
+
+---
+
+### What is the difference between ‘of’ and ‘in’?
+
+For Of: It loops over the Values
+For In: Loops over the Keys
+
+---
+
 ### for...in
 
 In JavaScript, the `for...in` loop is used to iterate over the properties of an object. Here's a basic example:
@@ -288,6 +405,10 @@ In summary:
 ### forEach
 
 `forEach` is a method in JavaScript that allows you to iterate over an array or an iterable object, executing a provided function for each element.
+
+ - It is often preferred when you want to perform the same action on each element of an array.
+ - It does not support "break" or "continue" statements for early termination or skipping iterations;
+ - It is specifically designed for iterating over the elements of an array and executing a provided function once for each element.
 
 *Syntax:*
 `array.forEach(callback(currentValue, index, array))`
