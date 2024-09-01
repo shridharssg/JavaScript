@@ -47,6 +47,7 @@ Example: `const numbers = [1, 2, 3, 4, 5]; const sum = numbers.reduce((acc, num)
 
 Output: `15`
 
+
 ---
 
 4. `find()`
