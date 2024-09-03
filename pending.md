@@ -288,7 +288,22 @@ MESSAGE_BROKER_URL="{{YOUR_MESSAGE_BROKER_URL}}"
 
 Replace YOUR_SECRET_KEY with a strong secret key, YOUR_MONGODB_URI with your MongoDB URI, and YOUR_MESSAGE_BROKER_URL with your RabbitMQ message broker URI.
 
-=======================
+---
+---
+
+memoization - js
+Explain the concept of stub in Node.js.
+DOM
+How does the DNS lookup function work in Node.js?
+In Node.js, the DNS module provides methods for performing DNS lookups. DNS stands for Domain Name System, and it is responsible for translating domain names into IP addresses. The DNS. lookup() method is used to perform a DNS lookup and resolve a domain name into an IP address.
+
+What is web socket?
+
+diff between event and callback
+
+The difference between an event and a callback is that an event is a mechanism that signals a change or action that represents a part of the program's behaviour, while a callback is a function that takes data and sends it back to the calling function.
 
 
+---
+---
 
