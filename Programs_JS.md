@@ -490,6 +490,25 @@ console.log(decompressed('3[abc]4[ab]c'));
 
 #### Program : 
 ```
+var a = 5;
+a = a++;
+a = a++;
+a = a++;
+a = a++;
+a = a++;
+a = a++;
+console.log(a);
+
+======================================
+
+for(var i = 1; i <= 5; i++){
+    setTimeout(()=>{ 
+	console.log(i) 
+    },0)
+}
+
+======================================
+
 
 ```
 ---
@@ -498,6 +517,28 @@ console.log(decompressed('3[abc]4[ab]c'));
 #### Program : 
 ```
 
+let ary = [2,3,3,4,2];
+
+o/p : 2,3
+
+
+let temp = [];
+let dupl = [];
+
+for(let i=0; i<ary.length; i++){
+	if(temp.length==0){
+		temp.push(ary[i]) //2
+	}else{
+		//3
+		if(temp.indexOf(ary[i])>-1){
+			dupl.push(ary[i])	
+		}else{
+			temp.push(ary[i])
+		}
+	}
+}
+	
+}
 ```
 ---
 
