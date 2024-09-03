@@ -414,6 +414,24 @@ console.log(sumWithInitial); // 20
 
 #### Program : 
 ```
+### 2. Use recursive functions to flatten a deeply nested array. ([1, [2, [3, 4], 5], 6]) ensure no loops
+
+
+function flatten(arr){
+    
+    //reduce method to iterate over array element
+	return arr.reduce((acc,current)=>{
+		if(Array.isArray(current)){
+			return acc.concat(flatten(current));
+		}else{
+			return acc.concat([current]);
+		}
+	},[]);
+}
+
+const nestAry = ([1, [2, [3, 4], 5], 6])
+
+console.log(flatten(nestAry)) //[ 1, 2, 3, 4, 5, 6 ]
 
 ```
 ---
@@ -421,6 +439,50 @@ console.log(sumWithInitial); // 20
 
 #### Program : 
 ```
+
+In this exercise, you're going to decompress a compressed string.
+Your input is a compressed string of the format number[string] and the decompressed output form should be the string written number times.
+
+For example: **The input 3[abc]4[ab]c**
+
+Would be output as : **abcabcabcababababc**
+
+**Other rules** 
+Number can have more than one digit. For example, 10[a] is allowed, and just means aaaaaaaaaa
+One repetition can occur inside another. For example, 2[3[a]b] decompresses into aaabaaab
+Characters allowed as input include digits, small English letters and brackets [ ].
+Digits are only to represent amount of repetitions.
+Letters are just letters.
+Brackets are only part of syntax of writing repeated substring.
+Input is always valid, so no need to check its validity.
+ 
+
+function decompressed(str){
+	let currentNum = 0;
+	let currentStr = '';
+	let stack = [];
+	
+	for(let val of str){
+		if(val ==='['){
+			stack.push(currentStr);
+			stack.push(currentNum);
+			currentStr = ''
+			currentNum = 0
+		}else if(val ===']'){
+			let num = stack.pop();	
+			let preString = stack.pop();
+			currentStr = preString  + currentStr.repeat(num);
+		}else if(val >='0' && val <='9' && ){
+			currentNum = currentNum *10+parseInt(val);	
+		}else{
+			currentStr +=val
+		}
+	}
+	return currentStr; 
+}
+
+console.log(decompressed('3[abc]4[ab]c'));
+
 
 ```
 ---
